@@ -6,25 +6,28 @@
       <p class="py-3 mx-auto max-w-screen-md text-center md:text-lg">あなたが訪れた寺院・史跡名跡を共有</p>
     </div>
 
-      <!-- カード全体 -->
-    <div class="px-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4">
+    <div class="px-10 py-2 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4 shadow-md">
       <% if @posts.present? %>
         <% @posts.each do |post| %>
-          <!-- 個別カード -->
           <div class="overflow-hidden bg-white-90 shadow-md rounded">
-            <!-- 写真 -->
-            <div class="group relative block h-48 overflow-hidden bg-gray-100 md:h-64">
-              <%= link_to image_tag(post.post_image_url, loading: "lazy", alt: "post image", class: "absolute inset-0 h-full w-full object-center transition duration-500 group-hover:scale-110 ",width: "300", height: "200"), post_path(post) %>
+            <div class="swiper-container mySwiper">
+              <div class="swiper-wrapper">
+                <% post.post_images.each do |image| %>
+                  <div class="swiper-slide group relative block h-40 overflow-hidden bg-gray-100 md:h-64">
+                    <%= link_to image_tag(image.url, loading: "lazy", alt: "post images", class: "absolute inset-0 h-full w-full object-center transition duration-500 group-hover:scale-110 "), post_path(post) %>
+                  </div>
+                <% end %>
+                <div class="swiper-pagination"></div>
+              </div>
             </div>
 
             <div class="p-1 sm:p-1">
-
               <div class="flex items-center">
                 <h2 class="text-md font-semibold"><%= post.temple_name %></h2>
                 ｜<span class="text-xs text-gray-700"><%= post.location%></span>
               </div>
 
-              <p class="text-gray-500 break-words text-xs mt-2"><%= truncate(post.comment, length: 100) %></p>
+              <p class="text-gray-500 break-words lg:h-12 text-xs mt-1"><%= truncate(post.comment, length: 90) %></p>
 
               <div class="mt-auto flex items-center items-end justify-between">
                 <div class="flex items-center gap-2">
@@ -48,3 +51,20 @@
     <% end %>
   </div>
 </div>
+
+<script>
+document.addEventListener('turbo:load', function () {
+  var swiper = new Swiper(".mySwiper", {
+    spaceBetween: 30,
+    effect: "fade",
+    pagination: {
+      el: ".swiper-pagination",
+      clickable: true,
+    },
+    navigation: {
+      nextEl: ".swiper-button-next",
+      prevEl: ".swiper-button-prev",
+    },
+  });
+});
+</script>

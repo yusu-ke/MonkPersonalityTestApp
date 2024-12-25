@@ -44,6 +44,6 @@ class PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:temple_name, :location, :comment, :post_image, :post_image_cache)
+    params.require(:post).permit(:temple_name, :location, :comment, {post_images: []})
   end
 end

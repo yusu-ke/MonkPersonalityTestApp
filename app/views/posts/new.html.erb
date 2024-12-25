@@ -16,8 +16,8 @@
       </div>
       <div>
         <%= f.label :画像, class: "mb-2 inline-block text-sm text-gray-800 sm:text-base" %>
-        <%= f.file_field :post_image, class: "form-control w-full border bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring", accept: 'image/*' %>
-        <%= f.hidden_field :post_image_cache %>
+        <%= f.file_field :post_images, multiple: true, class: "form-control w-full border bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring", accept: 'image/*' %>
+        <%= f.hidden_field :post_images_cache %>
       </div>
       <div>
         <%= f.label :コメント, class: "mb-2 inline-block text-sm text-gray-800 sm:text-base" %>
