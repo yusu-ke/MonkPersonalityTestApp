@@ -1,19 +1,25 @@
 <div class="mx-auto max-w-xl px-4 py-6 md:px-8">
 <!-- 個別カード -->
 <div class="overflow-hidden bg-white-90 px-2 md:px-6 lg:px-8 shadow-md rounded">
-  <!-- 写真 -->
-  <div class="relative flex items-center justify-center bg-gray-90">
-    <%= image_tag @post.post_image_url, loading: "lazy", alt: "", class: "max-w-[500px] max-h-[500px] w-auto h-auto object-cover object-center transition duration-200 group-hover:scale-110" %>
-  </div>
+  <div class="swiper-container mySwiper">
+    <div class="swiper-wrapper">
+      <% @post.post_images.each do |image| %>
+        <div class="swiper-slide relative items-center justify-center bg-gray-90"> 
+          <%= image_tag image.url, loading: "lazy", alt: "", class: "object-cover h-full w-full transition duration-200 group-hover:scale-110 mt-3" %>
+        </div>
+      <% end %>
+      <div class="swiper-pagination"></div>
+    </div>
+  </div>  
 
   <div class="sm:p-3 pl-4 flex-grow">
-    <div class="flex items-center">
+    <div class="flex items-center mt-3">
         <h2 class="text-xl font-semibold"><%= @post.temple_name %></h2>
         ｜<span class="text-xs text-gray-700"><%= @post.location %></span>
     </div>
    
 
-    <p class="text-gray-500 mt-2 break-words"><%= truncate(@post.comment, length: 100) %></p>
+    <p class="text-gray-500 mt-2 break-words"><%=@post.comment%></p>
 
     <div class="mt-auto flex items-end justify-between mb-2">
       <div class="flex items-center">

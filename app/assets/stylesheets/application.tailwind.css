@@ -47,3 +47,14 @@
     background-image: url("mobile_gradation.png");
   }
 }
+
+.swiper-container {
+  width: 100%;
+  height: 250px; /* 必要に応じて調整 */
+}
+
+.swiper-slide {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

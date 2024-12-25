@@ -7,6 +7,7 @@ ja:
         temple_name: "寺院・史跡名"
         location: "場所"
         comment: "コメント"
+        post_images: "画像"
     errors:
       messages:
         blank: "を入力してください"
