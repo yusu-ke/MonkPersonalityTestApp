@@ -34,7 +34,7 @@ class PostsController < ApplicationController
       render :edit, status: :unprocessable_entity
     end
   end
-  
+
   def destroy
     post = current_user.posts.find(params[:id])
     post.destroy!
@@ -44,6 +44,6 @@ class PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:temple_name, :location, :comment, {post_images: []})
+    params.require(:post).permit(:temple_name, :location, :comment, { post_images: [] })
   end
 end
