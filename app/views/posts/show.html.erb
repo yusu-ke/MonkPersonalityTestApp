@@ -1,47 +1,46 @@
 <div class="mx-auto max-w-xl px-4 py-6 md:px-8 ">
-<!-- 個別カード -->
-<div class="overflow-hidden pt-4 bg-white-90 px-2 md:px-6 lg:px-8 shadow-md rounded h-fit">
-
-  <div class="swiper-container mySwiper">
-    <div class="swiper-wrapper">
-      <% @post.post_images.each do |image| %>
-        <div class="swiper-slide group relative block h-80 overflow-hidden bg-gray-100 md:h-64"> 
-          <%= image_tag image.url, loading: "lazy", alt: "", class: "absolute inset-0 h-full w-full object-cover object-center transition duration-500 group-hover:scale-110 " %>
-        </div>
-      <% end %>
+  <div class="overflow-hidden pt-4 bg-white-90 px-2 md:px-6 lg:px-8 shadow-md rounded h-fit">
+    <div class="swiper-container mySwiper">
+      <div class="swiper-wrapper">
+        <% @post.post_images.each do |image| %>
+          <div class="swiper-slide group relative block h-80 overflow-hidden bg-gray-100 md:h-64"> 
+            <%= image_tag image.url, loading: "lazy", alt: "", class: "absolute inset-0 h-full w-full object-cover object-center transition duration-500 group-hover:scale-110 " %>
+          </div>
+        <% end %>
       <div class="swiper-pagination"></div>
     </div>
-  </div>  
+  </div>
 
   <div class="sm:p-3 pl-4 flex-grow">
     <div class="flex items-center mt-3">
-        <h2 class="text-xl font-semibold"><%= @post.temple_name %></h2>
-        ｜<span class="text-xs text-gray-700"><%= @post.location %></span>
+      <h2 class="text-xl font-semibold"><%= @post.temple_name %></h2>
+      ｜<span class="text-xs text-gray-700"><%= @post.location %></span>
     </div>
-   
-
     <p class="text-gray-500 mt-2 break-words"><%=@post.comment%></p>
-
     <div class="mt-auto flex items-end justify-between mb-2">
       <div class="flex items-center">
         <div>
           <span class="block text-indigo-500"><%= @post.user.name %></span>
         </div>
       </div>
-
-      <% if current_user == @post.user %>
-      <span class="px-2 py-2 text-sm text-gray-500">
-        <%= link_to edit_post_path(@post), id: "button-edit-#{@post.id}" do %>
-          <i class="fa-solid fa-pen-to-square mr-2 fa-xl"></i>
+        <% if current_user == @post.user %>
+          <span class="px-2 py-2 text-sm text-gray-500">
+            <%= link_to edit_post_path(@post), id: "button-edit-#{@post.id}" do %>
+              <i class="fa-solid fa-pen-to-square mr-2 fa-xl"></i>
+            <% end %>
+            <%= link_to post_path(@post), id: "button-delete-#{@post.id}", data: { turbo_method: :delete, turbo_confirm: "削除してもいいですか？" } do %>
+              <i class="fa-regular fa-trash-can mr-2 fa-xl"></i>
+            <% end %>
+            <i class="fa-regular fa-eye"><%= @post.view_counts.count %></i>
+            <%= @post.created_at.strftime("%Y-%m-%d") %>
+          </span>
+        <% else %>
+          <span class="px-2 py-2 text-sm text-gray-500">
+            <i class="fa-regular fa-eye"><%= @post.view_counts.count %></i>
+            <%= @post.created_at.strftime("%Y-%m-%d") %>
+          </span>
         <% end %>
-        <%= link_to post_path(@post), id: "button-delete-#{@post.id}", data: { turbo_method: :delete, turbo_confirm: "削除してもいいですか？" } do %>
-          <i class="fa-regular fa-trash-can mr-2 fa-xl"></i>
-        <% end %>
-        <%= @post.created_at.strftime("%Y-%m-%d") %>
-      </span>
-      <% end %>
+      </div>
     </div>
   </div>
-  
-</div>
 </div>
