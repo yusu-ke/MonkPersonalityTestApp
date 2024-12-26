@@ -1,0 +1,24 @@
+<!-- 非同期処理実装予定 -->
+  <div class="mx-auto max-w-screen-2xl px-4 md:px-8">
+    <div class="text-center max-w-2xl mx-auto shadow-md mt-10">
+      <h2 class="mb-4 text-center text-2xl font-bold text-gray-900 md:mb-8 lg:text-3xl">ユーザー編集</h2>
+
+      <%= form_with model: @user, url: profile_path(@user), method: :put do |f| %>
+        <div class="mx-auto max-w-lg rounded-lg border flex flex-col gap-4 p-4 pb-8 md:p-8">
+          <div class="mb-2 inline-block text-md text-gray-800 sm:text-base">
+            <%= f.label :name, "ユーザー名" %>
+            <%= f.text_field :name, class: "w-full border bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring" %>
+          </div>
+
+          <div class="mb-2 inline-block text-md text-gray-800 sm:text-base">
+            <%= f.label :email, "メールアドレス" %>
+            <%= f.email_field :email, class: "w-full border bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring" %>
+          </div>
+
+          <div class="btn w-full min-w-[120px] rounded border text-black bg-gradient-to-r from-[#a48953] to-[#8c7444] hover:from-white hover:to-white hover:text-gold1 hover:border-gold1">
+            <%= f.submit "保存する", class: "block w-full" %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
