@@ -17,6 +17,8 @@ Rails.application.routes.draw do
   root "home#index"
   resources :personality_tests, only: [ :new, :create, :show ]
   resources :posts, only: [ :index, :new, :create, :edit, :show, :edit, :update, :destroy ]
+  resource  :profile, only: [ :show, :edit, :update ]
+
   # resources :posts do
   #  resources :post_images, :only => [:create, :destroy]
   # end

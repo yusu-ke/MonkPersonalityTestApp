@@ -1,0 +1,41 @@
+  <div class="px-14 py-2 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6 shadow-md">
+    <% if @posts.present? %>
+      <% @posts.each do |post| %>
+        <div class="overflow-hidden bg-white-90 shadow-md rounded">
+          <div class="swiper-container mySwiper">
+            <div class="swiper-wrapper">
+              <% post.post_images.each do |image| %>
+                <div class="swiper-slide group relative block h-40 overflow-hidden bg-gray-100 md:h-64">
+                  <%= link_to image_tag(image.url, loading: "lazy", alt: "post images", class: "absolute inset-0 h-full w-full object-cover object-center transition duration-500 group-hover:scale-110 "), post_path(post) %>
+                </div>
+              <% end %>
+                <div class="swiper-pagination"></div>
+            </div>
+          </div>
+
+          <div class="p-1 sm:p-1">
+            <div class="flex items-center">
+              <h2 class="text-md font-semibold"><%= post.temple_name %></h2>
+                ｜<span class="text-xs text-gray-700"><%= post.location%></span>
+            </div>
+
+            <p class="text-gray-500 break-words lg:h-12 text-xs mt-1"><%= truncate(post.comment, length: 90) %></p>
+
+            <div class="mt-auto flex items-center items-end justify-between">
+              <div class="flex items-center gap-2">
+                <div>
+                  <span class="block text-sm text-indigo-500"><%= post.user.name %></span>
+                </div>
+              </div>
+
+              <span class="px-2 py-1 text-xs text-gray-500"><%= post.created_at.strftime("%Y-%m-%d") %></span>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    <% else %>
+      <div class="col-span-2 sm:col-span-2 md:col-span-3 flex items-center justify-center">
+        <p class="text-gray-700 text-center">掲示板がありません。</p>
+      </div>
+    <% end %>
+  </div>

@@ -1,0 +1,78 @@
+<div class="gradation-image object-contain">
+  <div class="mx-auto max-w-screen-2xl px-4 md:px-8">
+    <div class="text-center max-w-2xl mx-auto shadow-md mt-10">
+       <h2 class="mb-4 text-center text-2xl font-bold text-gray-900 md:mb-8 lg:text-3xl">ユーザー情報</h2>
+
+        <div class="mx-auto max-w-lg rounded-lg border flex flex-col gap-4 p-4 pb-8 md:p-8">
+          <div class="mb-2 inline-block text-md text-gray-800 sm:text-base">
+            <p>ユーザー名</p>
+            <div class="w-full border bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring">
+              <%= current_user.name %>
+            </div>
+          </div>
+         
+          <div class="mb-2 inline-block text-md text-gray-800 sm:text-base">
+            <p>メールアドレス</p>
+            <div class="w-full border bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring">
+              <%= current_user.email %>
+            </div>
+          </div>
+
+          <div class="btn w-full min-w-[120px] rounded border text-black bg-gradient-to-r from-[#a48953] to-[#8c7444] hover:from-white hover:to-white hover:text-gold1 hover:border-gold1">
+            <%= link_to "編集する", edit_profile_path, class: "block w-full"%>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+  <div class="py-1 sm:py-6 lg:py-7 mt-5">
+    <div class="mx-auto max-w-screen-xl px-5 md:px-8">
+      <div class="mb-5 md:mb-10">
+        <h1 class="mb-4 text-center text-2xl font-bold md:mb-6 lg:text-3xl">投稿一覧</h1>
+      </div>
+
+      <div class="px-14 py-2 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6 shadow-md">
+        <% if @posts.present? %>
+          <% @posts.each do |post| %>
+            <div class="overflow-hidden bg-white-90 shadow-md rounded">
+              <div class="swiper-container mySwiper">
+                <div class="swiper-wrapper">
+                  <% post.post_images.each do |image| %>
+                    <div class="swiper-slide group relative block h-40 overflow-hidden bg-gray-100 md:h-64">
+                      <%= link_to image_tag(image.url, loading: "lazy", alt: "post images", class: "absolute inset-0 h-full w-full object-cover object-center transition duration-500 group-hover:scale-110 "), post_path(post) %>
+                    </div>
+                  <% end %>
+                  <div class="swiper-pagination"></div>
+                </div>
+              </div>
+
+              <div class="p-1 sm:p-1">
+                <div class="flex items-center">
+                  <h2 class="text-md font-semibold"><%= post.temple_name %></h2>
+                  ｜<span class="text-xs text-gray-700"><%= post.location%></span>
+                </div>
+
+                <p class="text-gray-500 break-words lg:h-12 text-xs mt-1"><%= truncate(post.comment, length: 90) %></p>
+
+                <div class="mt-auto flex items-center items-end justify-between">
+                  <div class="flex items-center gap-2">
+                    <div>
+                      <span class="block text-sm text-indigo-500"><%= post.user.name %></span>
+                    </div>
+                  </div>
+
+                  <span class="px-2 py-1 text-xs text-gray-500"><%= post.created_at.strftime("%Y-%m-%d") %></span>
+                </div>
+              </div>   
+            </div>
+          <% end %>
+        </div>
+        <% else %>
+          <div class="col-span-2 sm:col-span-2 md:col-span-3 flex items-center justify-center">
+            <p class="text-gray-700 text-center">掲示板がありません。</p>
+          </div>
+        <% end %>
+      </div>
+
+  </div>
+</div>
