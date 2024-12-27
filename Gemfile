@@ -42,7 +42,7 @@ gem "rails-i18n"
 gem "devise-i18n-views"
 
 gem "carrierwave", "~> 3.0"
-
+# S3アップロード
 gem "fog-aws"
 # 環境変数の管理
 gem "dotenv-rails"
