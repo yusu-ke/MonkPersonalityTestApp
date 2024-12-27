@@ -60,8 +60,8 @@
                       <span class="block text-sm text-indigo-500"><%= post.user.name %></span>
                     </div>
                   </div>
-
-                  <span class="px-2 py-1 text-xs text-gray-500"><%= post.created_at.strftime("%Y-%m-%d") %></span>
+                  
+                  <span class="px-2 py-1 text-xs text-gray-500"><i class="fa-regular fa-eye"><%= post.view_counts.count %></i><%= post.created_at.strftime("%Y-%m-%d") %></span>
                 </div>
               </div>   
             </div>

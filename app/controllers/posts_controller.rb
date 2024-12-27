@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
   def index
-    @posts = Post.includes(:user)
+    @posts = Post.includes(:user, :view_counts).all
   end
 
   def new
@@ -19,6 +19,9 @@ class PostsController < ApplicationController
 
   def show
     @post = Post.find(params[:id])
+    unless current_user.view_counts.find_by(user_id: current_user.id, post_id: @post.id)
+      current_user.view_counts.create(post_id: @post.id)
+    end
   end
 
   def edit
