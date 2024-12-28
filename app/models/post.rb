@@ -8,6 +8,14 @@ class Post < ApplicationRecord
   belongs_to :user
   has_many :view_counts, dependent: :destroy
 
+  def self.ransackable_attributes(auth_object = nil)
+    [ "comment", "created_at", "id", "location", "post_images", "temple_name", "updated_at", "user_id" ]
+  end
+
+  def self.ransackable_associations(auth_object = nil)
+    [ "user", "view_counts" ]
+  end
+
   private
 
   def validate_image_coutn

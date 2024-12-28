@@ -40,15 +40,16 @@ gem "devise"
 gem "rails-i18n"
 
 gem "devise-i18n-views"
-
+# 画像投稿
 gem "carrierwave", "~> 3.0"
 # S3アップロード
 gem "fog-aws"
 # 環境変数の管理
 gem "dotenv-rails"
-
+# ページネーション
 gem "kaminari"
-
+# 検索機能
+gem "ransack"
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
 
