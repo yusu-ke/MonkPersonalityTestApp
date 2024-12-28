@@ -1,0 +1,18 @@
+<div class="flex lg:w-2/3 w-full flex-row mx-auto px-2 space-x-2 items-center h-6 mb-7">
+  <%= search_form_for @q, html: { class: "flex flex-row w-full space-x-4" } do |f| %>
+    <!-- 寺院名または本文検索窓 -->
+    <div class="relative flex-grow input input-bordered">
+      <%= f.search_field :temple_name_or_comment_cont, placeholder: "寺院名,本文", class: "w-full p-2 text-sm h-12" %>
+    </div>
+
+    <!-- 場所検索窓 -->
+    <div class="relative flex-grow input input-bordered">
+      <%= f.search_field :location_cont, placeholder: "場所", class: "w-full p-2 text-sm h-12" %>
+    </div>
+
+    <!-- 検索ボタン -->
+    <div>
+      <%= f.submit "検索", class: "rounded border text-black bg-gradient-to-r from-[#a48953] to-[#8c7444] hover:from-white hover:to-white hover:text-gold1 hover:border-gold1 px-4 py-3 text-sm" %>
+    </div>
+  <% end %>
+</div>
