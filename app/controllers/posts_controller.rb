@@ -71,7 +71,7 @@ class PostsController < ApplicationController
       :location,
       :comment,
       { post_images: [] },
-      map_attributes: [:id, :latitude, :longitude]
+      map_attributes: [ :id, :latitude, :longitude ]
       )
   end
 end
