@@ -34,6 +34,10 @@ class PostsController < ApplicationController
   def show
     @post = Post.find(params[:id])
     @map = @post.map
+    gon.latitude = @map.latitude
+    gon.longitude = @map.longitude
+
+    logger.debug "Latitude: #{@map.latitude}, Longitude: #{@map.longitude}"
     unless current_user.view_counts.find_by(user_id: current_user.id, post_id: @post.id)
       current_user.view_counts.create(post_id: @post.id)
     end

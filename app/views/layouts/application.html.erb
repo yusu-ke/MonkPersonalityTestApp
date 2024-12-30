@@ -24,8 +24,8 @@
   </head>
 
   <body>
+    <%= include_gon %>
     <div class="gradation-image object-contain">
-      
       <%= render 'shared/header'%>
       <%= render 'devise/shared/flash_message' unless controller_name == 'sessions' && action_name == 'new' %>
       <%= yield %>
