@@ -7,6 +7,8 @@ class Post < ApplicationRecord
   mount_uploaders :post_images, PostImageUploader
   belongs_to :user
   has_many :view_counts, dependent: :destroy
+  has_one :map, dependent: :destroy
+  accepts_nested_attributes_for :map
 
   def self.ransackable_attributes(auth_object = nil)
     [ "comment", "created_at", "id", "location", "post_images", "temple_name", "updated_at", "user_id" ]

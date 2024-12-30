@@ -42,5 +42,33 @@
         <% end %>
       </div>
     </div>
+    <div id="map" style="width: 100%; height: 400px;"></div>
   </div>
 </div>
+
+<script 
+type="text/javascript" 
+src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_MAP_API'] %>&callback=initializeMap" 
+async 
+defer>
+</script>
+
+<script>
+  function initializeMap() {
+    // gonを利用して緯度・経度を取得
+    const latitude = gon.latitude;
+    const longitude = gon.longitude;
+
+    // マップを表示
+    const map = new google.maps.Map(document.getElementById("map"), {
+      center: { lat: latitude, lng: longitude },
+      zoom: 9,
+    });
+
+    // ピンを立てる
+    new google.maps.Marker({
+      position: { lat: latitude, lng: longitude },
+      map: map,
+    });
+  }
+</script>
