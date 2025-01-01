@@ -14,9 +14,9 @@
   <div class="sm:p-3 pl-4 flex-grow">
     <div class="flex items-center mt-3">
       <h2 class="text-xl font-semibold"><%= @post.temple_name %></h2>
-      ｜<span class="text-xs text-gray-700"><%= @post.location %></span>
+      ｜<span class="text-xs text-gray-700"><%= @post.map.address %></span>
     </div>
-    <p class="text-gray-500 mt-2 break-words"><%=@post.comment%></p>
+    <p class="text-gray-500 mt-2 break-words h-16"><%=@post.comment%></p>
     <div class="mt-auto flex items-end justify-between mb-2">
       <div class="flex items-center">
         <div>
@@ -47,10 +47,9 @@
 </div>
 
 <script 
-type="text/javascript" 
-src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_MAP_API'] %>&callback=initializeMap" 
-async 
-defer>
+  type="text/javascript" 
+  src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_MAP_API'] %>&callback=initializeMap" 
+  async>
 </script>
 
 <script>

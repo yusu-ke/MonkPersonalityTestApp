@@ -17,6 +17,7 @@ class PostsController < ApplicationController
         longitude = params[:post][:map_attributes][:longitude]
         unless latitude.empty? && longitude.empty?
           @map = @post.build_map(
+            address: params[:post][:map_attributes][:address],
             latitude: latitude,
             longitude: longitude
           )
@@ -37,7 +38,6 @@ class PostsController < ApplicationController
     gon.latitude = @map.latitude
     gon.longitude = @map.longitude
 
-    logger.debug "Latitude: #{@map.latitude}, Longitude: #{@map.longitude}"
     unless current_user.view_counts.find_by(user_id: current_user.id, post_id: @post.id)
       current_user.view_counts.create(post_id: @post.id)
     end
@@ -68,10 +68,9 @@ class PostsController < ApplicationController
   def post_params
     params.require(:post).permit(
       :temple_name,
-      :location,
       :comment,
       { post_images: [] },
-      map_attributes: [ :id, :latitude, :longitude ]
+      map_attributes: [ :id, :address, :latitude, :longitude ]
       )
   end
 end

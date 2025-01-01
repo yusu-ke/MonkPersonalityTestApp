@@ -49,7 +49,7 @@
               <div class="p-1 sm:p-1">
                 <div class="flex items-center">
                   <h2 class="text-md font-semibold"><%= post.temple_name %></h2>
-                  ｜<span class="text-xs text-gray-700"><%= post.location%></span>
+                  ｜<span class="text-xs text-gray-700"><%= post.map.address%></span>
                 </div>
 
                 <p class="text-gray-500 break-words lg:h-12 text-xs mt-1"><%= truncate(post.comment, length: 90) %></p>

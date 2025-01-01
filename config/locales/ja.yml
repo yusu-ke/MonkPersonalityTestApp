@@ -8,6 +8,8 @@ ja:
         location: "場所"
         comment: "コメント"
         post_images: "画像"
+      map:
+        address: "場所"
     errors:
       messages:
         blank: "を入力してください"
