@@ -1,7 +1,7 @@
 class Post < ApplicationRecord
   validates :temple_name, presence: true, length: { maximum: 20 }
-  validates :location, presence: true, length: { maximum: 20 }
   validates :comment, presence: true, length: { maximum: 255 }
+  validates :post_images, presence: true
   validate :validate_image_coutn
 
   mount_uploaders :post_images, PostImageUploader
@@ -21,8 +21,8 @@ class Post < ApplicationRecord
   private
 
   def validate_image_coutn
-    if post_images.count > 5
-      errors.add(:post_images, "は5枚以下にしてください。")
+    if post_images.count >= 3
+      errors.add(:post_images, "は3枚以下にしてください。")
     end
   end
 end

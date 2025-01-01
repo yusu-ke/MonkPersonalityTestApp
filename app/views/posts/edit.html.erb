@@ -3,29 +3,71 @@
     <div class="pb-4 text-red-700">
       <%= render 'shared/error_messages', object: @post %>
     </div>
-
-    <%= form_with model: @post do |f| %>
-    <div class="mx-auto max-w-md rounded-lg border flex flex-col gap-4 md:p-8">
-      <div>
-        <%= f.label :寺院・史跡名, class: "mb-2 inline-block text-sm text-gray-800 sm:text-base" %>
-        <%= f.text_field :temple_name, class: "form-control w-full border bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring" %>
-      </div>
-      <div>
-        <%= f.label :場所, class: "mb-2 inline-block text-sm text-gray-800 sm:text-base" %>
-        <%= f.text_field :location, class: "form-control w-full border bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring" %>
-      </div>
-      <div>
-        <%= f.label :画像, class: "mb-2 inline-block text-sm text-gray-800 sm:text-base" %>
-        <%= f.file_field :post_images, class: "form-control w-full border bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring", accept: 'image/*' %>
-        <%= f.hidden_field :post_images_cache %>
-      </div>
-      <div>
-        <%= f.label :コメント, class: "mb-2 inline-block text-sm text-gray-800 sm:text-base" %>
-        <%= f.text_area :comment, class: "form-control w-full border bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring" %>
-      </div>
-      <div class="pt-4 pb-4">
-        <%= f.submit nil, class: "btn w-full min-w-[120px] rounded border text-black bg-gradient-to-r from-[#a48953] to-[#8c7444] hover:from-white hover:to-white hover:text-gold1 hover:border-gold1" %>
-      </div>
-    <% end %>
+  <div class="mx-auto max-w-md rounded-lg border flex flex-col gap-4 md:p-8">
+    <%= render 'form_post' %>
   </div>
 </div>
+
+
+<script 
+  type="text/javascript" 
+  src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_MAP_API'] %>&callback=initMap" 
+  async
+  defer
+  >
+</script>
+
+<script>
+  let map;
+  let map_lat
+  let map_lng
+  let marker
+  
+  function initMap() {
+    // 中心地の座標を指定
+    const myLatLng = { lat: 35.68090045006303, lng: 139.76690798417752 };
+  
+    // 地図を初期化
+    map = new google.maps.Map(document.getElementById('map'), {
+      center: myLatLng,
+      zoom: 10
+    });
+
+    // マーカーの初期化
+    marker = new google.maps.Marker();
+    map_lat = document.getElementById('post_map_latitude');
+    map_lng = document.getElementById('post_map_longitude'); // IDを取得
+  
+    google.maps.event.addListener(map, 'click', mylistener);
+    function mylistener(event) {
+      marker.setPosition(new google.maps.LatLng(event.latLng.lat(), event.latLng.lng()));
+      marker.setMap(map);
+      map_lat.value = event.latLng.lat(); // 緯度を設定
+      map_lng.value = event.latLng.lng(); // 経度を設定
+    }
+  }
+
+  function codeAddress(){
+    geocoder = new google.maps.Geocoder()
+    let inputAddress = document.getElementById('address').value;
+
+    // 地名をもとに位置を取得
+    geocoder.geocode( { 
+      'address': inputAddress,
+      'region': 'jp'
+    }, function(results, status) {
+      if (status == 'OK') {
+      map.setCenter(results[0].geometry.location);
+      map_result = results[0].geometry.location;
+      map_lat.value = map_result.lat();
+      map_lng.value = map_result.lng();
+      marker.setPosition(new google.maps.LatLng(map_result.lat(), map_result.lng()));
+      marker.setMap(map);
+      console.log(map_lat.value,map_lng.value);
+    } else {
+      alert('該当する結果がありませんでした');
+      initMap();
+    }
+  });   
+}
+</script>

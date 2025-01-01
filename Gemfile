@@ -50,8 +50,11 @@ gem "dotenv-rails"
 gem "kaminari"
 # 検索機能
 gem "ransack"
-
+# 変数をjavascript内で使用
 gem "gon"
+# 住所から緯度経度算出
+gem "geocoder"
+
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
 
