@@ -12,7 +12,7 @@ Geocoder.configure(
 
   lookup: :google,
   use_https: true,
-  api_key: ENV['GOOGLE_MAP_API'],
+  api_key: ENV["GOOGLE_MAP_API"],
 
   # Exceptions that should not be rescued by default
   # (if you want to implement custom error handling);
