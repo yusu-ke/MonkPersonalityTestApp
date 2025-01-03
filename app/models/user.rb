@@ -9,7 +9,7 @@ class User < ApplicationRecord
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
       user.name = auth.info.name
       user.email = auth.info.email
-      user.password = Devise.friendly_token[ 0, 20 ]
+      user.password = Devise.friendly_token[0, 20]
     end
   end
 
@@ -20,5 +20,5 @@ class User < ApplicationRecord
   validates :name, presence: true, length: { maximum: 50 }
   validates :uid, presence: true, uniqueness: { scope: :provider }, if: -> { uid.present? }
   has_many :posts, dependent: :destroy
-  has_many :view_counts, dependent: :destroy 
+  has_many :view_counts, dependent: :destroy
 end
