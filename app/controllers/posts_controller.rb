@@ -1,4 +1,6 @@
 class PostsController < ApplicationController
+  before_action :set_post, only: %i[ edit update destroy ]
+
   def index
     @q = Post.ransack(params[:q])
     @posts = @q.result(distinct: false).includes(:user, :view_counts).order(created_at: :desc).all.page(params[:page])
@@ -10,7 +12,6 @@ class PostsController < ApplicationController
 
   def create
     @post = current_user.posts.build(post_params)
-    logger.debug "Params: #{params[:post][:map_attributes]}"
     if @post.save
       if params[:post][:map_attributes].present?
         latitude = params[:post][:map_attributes][:latitude]
@@ -34,9 +35,7 @@ class PostsController < ApplicationController
 
   def show
     @post = Post.find(params[:id])
-    @map = @post.map
-    gon.latitude = @map.latitude
-    gon.longitude = @map.longitude
+    set_map_data
 
     unless current_user.view_counts.find_by(user_id: current_user.id, post_id: @post.id)
       current_user.view_counts.create(post_id: @post.id)
@@ -44,11 +43,10 @@ class PostsController < ApplicationController
   end
 
   def edit
-    @post = current_user.posts.find(params[:id])
+    set_map_data
   end
 
   def update
-    @post = current_user.posts.find(params[:id])
     if @post.update(post_params)
       redirect_to post_path(@post), success: "掲示板を更新しました。"
     else
@@ -58,12 +56,21 @@ class PostsController < ApplicationController
   end
 
   def destroy
-    post = current_user.posts.find(params[:id])
-    post.destroy!
+    @post.destroy!
     redirect_to posts_path, success: "削除しました。"
   end
 
   private
+
+  def set_post
+    @post = current_user.posts.find(params[:id])
+  end
+
+  def set_map_data
+    @map = @post.map
+    gon.latitude = @map.latitude
+    gon.longitude = @map.longitude
+  end
 
   def post_params
     params.require(:post).permit(

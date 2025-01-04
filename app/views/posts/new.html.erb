@@ -4,7 +4,7 @@
       <%= render 'shared/error_messages', object: @post %>
     </div>
   <div class="mx-auto max-w-md rounded-lg border flex flex-col gap-4 md:p-8">
-    <%= render 'form_post' %>
+    <%= render 'form_post', map_id: "new-map" %>
   </div>
 </div>
 
@@ -28,9 +28,9 @@
     const myLatLng = { lat: 35.68090045006303, lng: 139.76690798417752 };
   
     // 地図を初期化
-    map = new google.maps.Map(document.getElementById('map'), {
+    map = new google.maps.Map(document.getElementById('new-map'), {
       center: myLatLng,
-      zoom: 10
+      zoom: 12
     });
 
     // マーカーの初期化
