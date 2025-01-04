@@ -25,7 +25,7 @@
       </div>
         <% if current_user == @post.user %>
           <span class="px-2 py-2 text-sm text-gray-500">
-            <%= link_to edit_post_path(@post), id: "button-edit-#{@post.id}" do %>
+            <%= link_to edit_post_path(@post), id: "button-edit-#{@post.id}", data: { turbo: false }  do %>
               <i class="fa-solid fa-pen-to-square mr-2 fa-xl"></i>
             <% end %>
             <%= link_to post_path(@post), id: "button-delete-#{@post.id}", data: { turbo_method: :delete, turbo_confirm: "削除してもいいですか？" } do %>

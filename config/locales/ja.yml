@@ -5,7 +5,6 @@ ja:
     attributes:
       post:
         temple_name: "寺院・史跡名"
-        location: "場所"
         comment: "コメント"
         post_images: "画像"
       map:
@@ -13,6 +12,7 @@ ja:
     errors:
       messages:
         blank: "を入力してください"
+        post_images_blank: "を選択してください"
   views:
       pagination:
         previous: "前へ"
