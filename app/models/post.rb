@@ -1,7 +1,7 @@
 class Post < ApplicationRecord
   validates :temple_name, presence: true, length: { maximum: 20 }
   validates :comment, presence: true, length: { maximum: 255 }
-  validates :post_images, presence: { message: I18n.t('activerecord.errors.messages.post_images_blank') }
+  validates :post_images, presence: { message: I18n.t("activerecord.errors.messages.post_images_blank") }
   validate :validate_image_coutn
 
   mount_uploaders :post_images, PostImageUploader

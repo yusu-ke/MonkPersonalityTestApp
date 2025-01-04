@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
   before_action :set_post, only: %i[ edit update destroy ]
-  
+
   def index
     @q = Post.ransack(params[:q])
     @posts = @q.result(distinct: false).includes(:user, :view_counts).order(created_at: :desc).all.page(params[:page])
