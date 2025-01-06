@@ -59,6 +59,14 @@ Rails.application.configure do
     .tap  { |logger| logger.formatter = ::Logger::Formatter.new }
     .then { |logger| ActiveSupport::TaggedLogging.new(logger) }
 
+  config.action_mailer.logger = ActiveSupport::Logger.new(STDOUT)  
+
+  config.action_mailer.logger.level = :debug
+
+  config.action_mailer.logger.formatter = ::Logger::Formatter.new
+
+  config.action_mailer.raise_delivery_errors = true
+
   # Prepend all log lines with the following tags.
   config.log_tags = [ :request_id ]
 
@@ -90,11 +98,7 @@ Rails.application.configure do
     enable_starttls_auto: true
   }
 
-  config.action_mailer.logger.level = :debug
 
-  config.action_mailer.logger.formatter = ::Logger::Formatter.new
-
-  config.action_mailer.raise_delivery_errors = true
 
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
