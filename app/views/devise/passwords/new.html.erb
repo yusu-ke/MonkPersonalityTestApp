@@ -3,6 +3,16 @@
     <div class="text-center max-w-2xl mx-auto shadow-md mt-10">
       <h2 class="mb-4 text-center text-2xl font-bold text-gray-900 md:mb-8 lg:text-3xl">パスワード再設定</h2>
 
+      
+        <div class="text-left pb-6 pl-7">
+          <ul class="space-y-4">
+            <li>１. 当ページでご登録いただいたメールアドレスを入力してください。</li>
+            <li>２. メールアドレスを受信後、パスワード再設定のためのURLにアクセスしてください。</li>
+            <li>３. アクセス後、新パスワードを入力の上、再設定してください。</li>
+          </ul>
+        </div>
+      
+
       <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
         <div class="mx-auto max-w-lg rounded-lg border flex flex-col gap-4 p-4 md:p-8">
           <%= render "devise/shared/error_messages", resource: resource %>
@@ -15,8 +25,9 @@
           <div class="actions pt-4">
             <%= f.submit "送信", class: "btn w-full min-w-[120px] rounded border text-black bg-gradient-to-r from-[#a48953] to-[#8c7444] hover:from-white hover:to-white hover:text-gold1 hover:border-gold1" %>
           </div>
+        </div> 
       <% end %>
-    </div>
+    
     <%= render "devise/shared/links" %>
     </div>
   </div>
