@@ -1,6 +1,6 @@
 <div class="gradation-image object-contain">
   <div class="mx-auto max-w-screen-2xl px-4 md:px-8">
-    <div class="text-center max-w-2xl mx-auto shadow-md mt-10">
+    <div class="text-center max-w-2xl mx-auto shadow-md mt-10 pb-8">
        <h2 class="mb-4 text-center text-2xl font-bold text-gray-900 md:mb-8 lg:text-3xl">ユーザー情報</h2>
 
         <div class="mx-auto max-w-lg rounded-lg border flex flex-col gap-4 p-4 pb-8 md:p-8">
@@ -24,9 +24,18 @@
         </div>
       </div>
     </div>
+
   
+    <div class="mb-5 mt-8 md:mb-10">
+    <h1 class="mb-4 text-center text-2xl font-bold md:mb-6 lg:text-3xl">マイマップ</h1>
+  </div>
+    <div class="flex justify-center mt-5">
+    <div id="profiles-map" class="w-full max-w-3xl" style="height: 500px;"></div>
+  </div>
+
   <div class="py-1 sm:py-6 lg:py-7 mt-5">
     <div class="mx-auto max-w-screen-xl px-5 md:px-8">
+
       <div class="mb-5 md:mb-10">
         <h1 class="mb-4 text-center text-2xl font-bold md:mb-6 lg:text-3xl">投稿一覧</h1>
       </div>
@@ -73,6 +82,49 @@
           </div>
         <% end %>
       </div>
-
   </div>
 </div>
+
+<script 
+  type="text/javascript" 
+  src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_MAP_API'] %>&callback=profilesInitMap" 
+  async
+  defer
+></script>
+
+<script>
+  function profilesInitMap() {
+    // 記事未作成時の初期位置
+    const myLatLng = { lat: 35.68090045006303, lng: 139.76690798417752 };
+
+    // 地図の初期位置
+    const initialPosition = gon?.locations?.length > 0
+      ? { lat: gon.locations[0].latitude, lng: gon.locations[0].longitude }
+      : myLatLng
+
+    // 地図を作成
+    const map = new google.maps.Map(document.getElementById("profiles-map"), {
+      center: initialPosition,
+      zoom: 9,
+    });
+
+    if (gon?.locations?.length > 0) {
+      gon.locations.forEach((location) => {
+        const marker = new google.maps.Marker({
+          position: { lat: location.latitude, lng: location.longitude },
+          map: map,
+          title: location.address,
+        });
+
+        marker.addListener("click", function(){
+          window.location.href = location.link;
+        });
+      });
+    } else {
+      new google.maps.Marker({
+        position: myLatLng,
+        map: map,
+      });
+    }
+  }
+</script>
