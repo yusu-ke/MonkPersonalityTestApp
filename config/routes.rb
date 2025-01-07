@@ -21,7 +21,11 @@ Rails.application.routes.draw do
   root "home#index"
   resources :personality_tests, only: [ :new, :create, :show ]
   resources :posts, only: [ :index, :new, :create, :edit, :show, :edit, :update, :destroy ]
-  resource  :profile, only: [ :show, :edit, :update ]
+  resource :profile, only: [ :show, :edit, :update ] do
+    collection do
+      get :user_info
+    end
+  end
 
   # resources :posts do
   #  resources :post_images, :only => [:create, :destroy]

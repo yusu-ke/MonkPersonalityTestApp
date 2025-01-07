@@ -1,37 +1,12 @@
 <div class="gradation-image object-contain">
   <div class="mx-auto max-w-screen-2xl px-4 md:px-8">
-    <div class="text-center max-w-2xl mx-auto shadow-md mt-10 pb-8">
-       <h2 class="mb-4 text-center text-2xl font-bold text-gray-900 md:mb-8 lg:text-3xl">ユーザー情報</h2>
-
-        <div class="mx-auto max-w-lg rounded-lg border flex flex-col gap-4 p-4 pb-8 md:p-8">
-          <div class="mb-2 inline-block text-md text-gray-800 sm:text-base">
-            <p>ユーザー名</p>
-            <div class="w-full border bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring">
-              <%= current_user.name %>
-            </div>
-          </div>
-         
-          <div class="mb-2 inline-block text-md text-gray-800 sm:text-base">
-            <p>メールアドレス</p>
-            <div class="w-full border bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring">
-              <%= current_user.email %>
-            </div>
-          </div>
-
-          <div class="btn w-full min-w-[120px] rounded border text-black bg-gradient-to-r from-[#a48953] to-[#8c7444] hover:from-white hover:to-white hover:text-gold1 hover:border-gold1">
-            <%= link_to "編集する", edit_profile_path, class: "block w-full"%>
-          </div>
-        </div>
-      </div>
+    <div class="mb-5 mt-8 md:mb-10">
+      <h1 class="mb-4 text-center text-2xl font-bold md:mb-6 lg:text-3xl">マイマップ</h1>
     </div>
 
-  
-    <div class="mb-5 mt-8 md:mb-10">
-    <h1 class="mb-4 text-center text-2xl font-bold md:mb-6 lg:text-3xl">マイマップ</h1>
-  </div>
     <div class="flex justify-center mt-5">
-    <div id="profiles-map" class="w-full max-w-3xl" style="height: 500px;"></div>
-  </div>
+      <div id="profiles-map" class="w-full max-w-3xl" style="height: 500px;"></div>
+    </div>
 
   <div class="py-1 sm:py-6 lg:py-7 mt-5">
     <div class="mx-auto max-w-screen-xl px-5 md:px-8">
