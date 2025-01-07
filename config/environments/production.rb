@@ -59,7 +59,7 @@ Rails.application.configure do
     .tap  { |logger| logger.formatter = ::Logger::Formatter.new }
     .then { |logger| ActiveSupport::TaggedLogging.new(logger) }
 
-  config.action_mailer.logger = ActiveSupport::Logger.new(STDOUT)  
+  config.action_mailer.logger = ActiveSupport::Logger.new(STDOUT)
 
   config.action_mailer.logger.level = :debug
 
