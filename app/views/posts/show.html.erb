@@ -54,20 +54,27 @@
 
 <script>
   function initializeMap() {
-    // gonを利用して緯度・経度を取得
     const latitude = gon.latitude;
     const longitude = gon.longitude;
+    const selectedMarker = gon.marker_image
 
-    // マップを表示
     const map = new google.maps.Map(document.getElementById("map"), {
       center: { lat: latitude, lng: longitude },
       zoom: 9,
     });
 
+    const iconOptions = selectedMarker
+    ? {
+        url: selectedMarker,
+        scaledSize: new google.maps.Size(33, 33)
+      }
+    : null;
+
     // ピンを立てる
     new google.maps.Marker({
       position: { lat: latitude, lng: longitude },
       map: map,
+      icon: iconOptions,
     });
   }
 </script>

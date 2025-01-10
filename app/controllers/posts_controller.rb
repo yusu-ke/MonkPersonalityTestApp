@@ -11,16 +11,19 @@ class PostsController < ApplicationController
   end
 
   def create
+    puts params[:post].inspect
     @post = current_user.posts.build(post_params)
     if @post.save
       if params[:post][:map_attributes].present?
         latitude = params[:post][:map_attributes][:latitude]
         longitude = params[:post][:map_attributes][:longitude]
+        marker_image = params[:post][:map_attributes][:marker_image]
         unless latitude.empty? && longitude.empty?
           @map = @post.build_map(
             address: params[:post][:map_attributes][:address],
             latitude: latitude,
-            longitude: longitude
+            longitude: longitude,
+            marker_image: marker_image
           )
           @map.save
         end
@@ -70,6 +73,7 @@ class PostsController < ApplicationController
     @map = @post.map
     gon.latitude = @map.latitude
     gon.longitude = @map.longitude
+    gon.marker_image = @map.marker_image
   end
 
   def post_params
@@ -77,7 +81,8 @@ class PostsController < ApplicationController
       :temple_name,
       :comment,
       { post_images: [] },
-      map_attributes: [ :id, :address, :latitude, :longitude ]
-      )
+      map_attributes: [:id, :address, :latitude, :longitude, :marker_image]
+    )
   end
+  
 end
