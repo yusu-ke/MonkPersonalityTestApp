@@ -18,56 +18,84 @@
 </script>
 
 <script>
-  let map;
-  let map_lat
-  let map_lng
-  let marker
-  
-  function initMap() {
-    // 中心地の座標を指定
-    const myLatLng = { lat: 35.68090045006303, lng: 139.76690798417752 };
-  
-    // 地図を初期化
-    map = new google.maps.Map(document.getElementById('new-map'), {
-      center: myLatLng,
-      zoom: 12
-    });
+let map;
+let map_lat;
+let map_lng;
+let marker;
 
-    // マーカーの初期化
-    marker = new google.maps.Marker();
-    map_lat = document.getElementById('post_map_latitude');
-    map_lng = document.getElementById('post_map_longitude'); // IDを取得
-  
-    google.maps.event.addListener(map, 'click', mylistener);
-    function mylistener(event) {
-      marker.setPosition(new google.maps.LatLng(event.latLng.lat(), event.latLng.lng()));
-      marker.setMap(map);
-      map_lat.value = event.latLng.lat(); // 緯度を設定
-      map_lng.value = event.latLng.lng(); // 経度を設定
-    }
+function markerData(imageUrl) {
+  document.getElementById('post_map_marker_image').value = imageUrl //隠しフィールドに値を設定
+}
+
+
+// アイコンをマーカーとして設定
+function newMarker(lat, lng) {
+  const selectedMarker = document.querySelector('input[name="post[marker_image]"]:checked')?.value;
+  const iconOptions = selectedMarker
+    ? {
+        url: selectedMarker,
+        scaledSize: new google.maps.Size(33, 33)
+      }
+    : null;
+
+  if (selectedMarker) {
+    markerData(selectedMarker);
   }
 
-  function codeAddress(){
-    geocoder = new google.maps.Geocoder()
-    let inputAddress = document.getElementById('address').value;
-
-    // 地名をもとに位置を取得
-    geocoder.geocode( { 
-      'address': inputAddress,
-      'region': 'jp'
-    }, function(results, status) {
-      if (status == 'OK') {
-      map.setCenter(results[0].geometry.location);
-      map_result = results[0].geometry.location;
-      map_lat.value = map_result.lat();
-      map_lng.value = map_result.lng();
-      marker.setPosition(new google.maps.LatLng(map_result.lat(), map_result.lng()));
-      marker.setMap(map);
-      console.log(map_lat.value,map_lng.value);
-    } else {
-      alert('該当する結果がありませんでした');
-      initMap();
-    }
-  });   
+  marker.setPosition(new google.maps.LatLng(lat, lng));
+  marker.setMap(map);
+  marker.setIcon(iconOptions);
 }
+
+// 地図の初期化とクリックイベント
+function initMap() {
+  const myLatLng = { lat: 35.68090045006303, lng: 139.76690798417752 };
+
+  map = new google.maps.Map(document.getElementById('new-map'), {
+    center: myLatLng,
+    zoom: 12
+  });
+
+  marker = new google.maps.Marker();
+  map_lat = document.getElementById('post_map_latitude');
+  map_lng = document.getElementById('post_map_longitude');
+
+  google.maps.event.addListener(map, 'click', function (event) {
+    const lat = event.latLng.lat();
+    const lng = event.latLng.lng();
+
+    map_lat.value = lat; // 隠しフィールドに値を設定 
+    map_lng.value = lng; // 隠しフィールドに値を設定
+
+    newMarker(lat, lng);
+  });
+}
+
+// 地名検索
+function codeAddress() {
+  const geocoder = new google.maps.Geocoder();
+  const inputAddress = document.getElementById('address').value;
+
+  geocoder.geocode(
+    {
+      address: inputAddress,
+      region: 'jp'
+    },
+    function (results, status) {
+      if (status === 'OK') {
+        const lat = results[0].geometry.location.lat();
+        const lng = results[0].geometry.location.lng();
+
+        map.setCenter(results[0].geometry.location);
+        map_lat.value = lat;
+        map_lng.value = lng;
+
+        newMarker(lat, lng);
+      } else {
+        alert('該当する結果がありませんでした');
+      }
+    }
+  );
+}
+
 </script>

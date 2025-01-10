@@ -3,8 +3,27 @@
     <%= f.label :寺院・史跡名, class: "mb-2 inline-block text-sm text-gray-800 sm:text-base" %>
     <%= f.text_field :temple_name, class: "form-control w-full border bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring" %>
   </div>
+  
 
-  <div class="input-field">
+  <div class="mt-4 items-center">
+    <div class="text-center">地図アイコンを選択</div>
+      <div class="text-center mb-2 text-sm">（未選択の場合、GoogleMap標準マーカーになります）</div>
+        <div class="flex flex-wrap justify-center">
+          <% ["castel.png", "museum.png", "kohun.png", "mountain.png", "torii.png", "battlefield.png", "buddha.png", "china_gate.png"].each_with_index do |icon, index| %>
+            <div class="w-1/4 p-2">
+              <%= f.radio_button :marker_image, "/assets/marker_image/#{icon}", id: "icon_#{index}", class: "hidden peer" %>
+              <%= label_tag "icon_#{index}", class: "cursor-pointer border-2 border-gray-300 rounded-md hover:border-indigo-500 peer-checked:border-indigo-500 block" do %>
+                <%= image_tag("marker_image/#{icon}", alt: "アイコン#{index + 1}", class: "w-16 h-16 object-cover mx-auto") %>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    
+
+
+
+  <div class="input-field mt-4">
     <%= f.fields_for :map, @post.map || @post.build_map, id: 'map-fields' do |map| %>
       <%= map.label :address, "場所", class: "mb-2 inline-block text-sm text-gray-800 sm:text-base" %>
       <%= map.text_field :address, id: "address", class: "form-control w-full border bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring" %>
@@ -13,6 +32,7 @@
 
       <div id="<%= map_id %>" class="w-full h-[400px] mb-5"></div>
 
+      <%= map.hidden_field :marker_image, id: "post_map_marker_image" %>
       <%= map.hidden_field :latitude, id: "post_map_latitude" %>
       <%= map.hidden_field :longitude, id: "post_map_longitude" %>
     <% end %>

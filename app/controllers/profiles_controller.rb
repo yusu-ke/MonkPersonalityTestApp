@@ -24,6 +24,7 @@ class ProfilesController < ApplicationController
         latitude: location.latitude,
         longitude: location.longitude,
         address: location.address,
+        marker_image: location.marker_image,
         link: post_path(location.post_id)
       }
     end

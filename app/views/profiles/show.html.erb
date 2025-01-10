@@ -80,7 +80,7 @@
     // 地図を作成
     const map = new google.maps.Map(document.getElementById("profiles-map"), {
       center: initialPosition,
-      zoom: 9,
+      zoom: 12,
     });
 
     if (gon?.locations?.length > 0) {
@@ -89,6 +89,10 @@
           position: { lat: location.latitude, lng: location.longitude },
           map: map,
           title: location.address,
+          icon: location.marker_image? {
+            url: location.marker_image,
+            scaledSize: new google.maps.Size(30, 30)
+          } : null,
         });
 
         marker.addListener("click", function(){

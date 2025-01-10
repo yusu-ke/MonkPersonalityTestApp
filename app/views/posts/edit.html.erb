@@ -23,6 +23,19 @@
   let map_lng;
   let marker;
 
+  function markerData(imageUrl) {
+    // 隠しフィールドに画像URLを設定
+    document.getElementById('post_map_marker_image').value = imageUrl;
+
+    // マーカーのアイコンを更新
+    if (marker) {
+      marker.setIcon({
+        url: imageUrl,
+        scaledSize: new google.maps.Size(33, 33) // 必要に応じて画像サイズを調整
+      });
+    }
+  }
+
   function initializeMap() {
     // もしユーザーの保存した座標があれば、それを使う
     const myLatLng = { 
@@ -36,10 +49,26 @@
       zoom: 12
     });
 
+    const initialImageUrl = document.getElementById('post_map_marker_image')?.value || null;
+
     // マーカーの初期化
-    marker = new google.maps.Marker();
+    marker = new google.maps.Marker({
+      position: myLatLng,
+      map: map,
+      icon: {
+        url: initialImageUrl,
+        scaledSize: new google.maps.Size(33, 33)
+      }
+    });
+
     map_lat = document.getElementById('post_map_latitude');
     map_lng = document.getElementById('post_map_longitude');
+
+    document.addEventListener('change', function (event) {
+      if (event.target.name === "post[marker_image]") {
+        markerData(event.target.value); // マーカー画像を更新
+      }
+    });
 
     // 地図上でクリックした位置にマーカーを設定
     google.maps.event.addListener(map, 'click', mylistener);
@@ -83,4 +112,3 @@
     });
   }
 </script>
-
