@@ -11,9 +11,9 @@
         <div class="flex flex-wrap justify-center">
           <% ["castel.png", "museum.png", "kohun.png", "mountain.png", "torii.png", "battlefield.png", "buddha.png", "china_gate.png"].each_with_index do |icon, index| %>
             <div class="w-1/4 p-2">
-              <%= f.radio_button :marker_image, "/assets/marker_image/#{icon}", id: "icon_#{index}", class: "hidden peer" %>
+              <%= f.radio_button :marker_image, "/assets/#{icon}", id: "icon_#{index}", class: "hidden peer" %>
               <%= label_tag "icon_#{index}", class: "cursor-pointer border-2 border-gray-300 rounded-md hover:border-indigo-500 peer-checked:border-indigo-500 block" do %>
-                <%= image_tag(asset_path("marker_image/#{icon}"), alt: "アイコン#{index + 1}", class: "w-16 h-16 object-cover mx-auto") %>
+                <%= image_tag(asset_path(icon), alt: "アイコン#{index + 1}", class: "w-16 h-16 object-cover mx-auto") %>
               <% end %>
             </div>
           <% end %>
