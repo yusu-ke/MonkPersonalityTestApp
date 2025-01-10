@@ -12,7 +12,7 @@
             <div class="w-1/4 p-2">
               <%= f.radio_button :marker_image, "/assets/#{icon}", id: "icon_#{index}", class: "hidden peer" %>
               <%= label_tag "icon_#{index}", class: "cursor-pointer border-2 border-gray-300 rounded-md hover:border-indigo-500 peer-checked:border-indigo-500 block" do %>
-                <%= image_tag(icon, alt: "アイコン#{index + 1}", class: "w-16 h-16 object-cover mx-auto") %>
+                <%= image_tag("/assets/#{icon}", alt: "アイコン#{index + 1}", class: "w-16 h-16 object-cover mx-auto") %>
               <% end %>
             </div>
           <% end %>
