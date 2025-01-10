@@ -81,8 +81,7 @@ class PostsController < ApplicationController
       :temple_name,
       :comment,
       { post_images: [] },
-      map_attributes: [:id, :address, :latitude, :longitude, :marker_image]
+      map_attributes: [ :id, :address, :latitude, :longitude, :marker_image ]
     )
   end
-  
 end
