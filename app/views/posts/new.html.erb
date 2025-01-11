@@ -31,7 +31,7 @@ function markerData(imageUrl) {
 // アイコンをマーカーとして設定
 function newMarker(lat, lng) {
   const selectedMarker = document.querySelector('input[name="post[marker_image]"]:checked')?.value;
-  console.log("Selected Marker URL:", selectedMarker); 
+  console.log("Marker URL:", selectedMarker); 
   const iconOptions = selectedMarker
     ? {
         url: selectedMarker,
