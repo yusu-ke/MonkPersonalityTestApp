@@ -5,9 +5,9 @@ import "./controllers"
 document.addEventListener('turbo:load', function () {
   var swiper = new Swiper(".mySwiper", {
     spaceBetween: 30,
-    effect: "fade",
+    effect: "slide",
     slidesPerView: 1,
-    autoHeight: true,
+    autoHeight: false,
     pagination: {
       el: ".swiper-pagination",
       clickable: true,
