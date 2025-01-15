@@ -55,7 +55,8 @@ class PostImageUploader < CarrierWave::Uploader::Base
 
 
   def filename
-    super.chomp(File.extname(super)) + ".webp" if original_filename.present?
+    return unless file
+    super.chomp(File.extname(super)) + ".webp"
   end
 
   # Add an allowlist of extensions which are allowed to be uploaded.
