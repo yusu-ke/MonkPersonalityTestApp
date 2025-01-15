@@ -7,7 +7,7 @@ document.addEventListener('turbo:load', function () {
     spaceBetween: 30,
     effect: "slide",
     slidesPerView: 1,
-    autoHeight: false,
+    autoHeight: true,
     pagination: {
       el: ".swiper-pagination",
       clickable: true,
