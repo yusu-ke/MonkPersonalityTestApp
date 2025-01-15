@@ -42,6 +42,8 @@ gem "rails-i18n"
 gem "devise-i18n-views"
 # 画像投稿
 gem "carrierwave", "~> 3.0"
+# 画像加工
+gem "mini_magick"
 # S3アップロード
 gem "fog-aws"
 # 環境変数の管理
@@ -54,7 +56,6 @@ gem "ransack"
 gem "gon"
 # 住所から緯度経度算出
 gem "geocoder"
-
 # GoogleのOAuth2認証
 gem "omniauth-google-oauth2"
 
