@@ -3,7 +3,7 @@
     <div class="swiper-container mySwiper">
       <div class="swiper-wrapper">
         <% @post.post_images.each do |image| %>
-          <div class="swiper-slide group relative block bg-white-90 justify-center h-[500px] w-full">
+          <div class="swiper-slide group relative block bg-white-90 flex justify-center h-[500px] w-full">
             <%= image_tag image.url, loading: "lazy", alt: "", class: "h-full w-full object-contain mx-auto rounded-lg transition duration-500 group-hover:scale-110" %>
           </div>
         <% end %>
