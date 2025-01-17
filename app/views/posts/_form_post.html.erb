@@ -21,7 +21,8 @@
 
   <div class="input-field mt-4">
     <%= f.fields_for :map, @post.map || @post.build_map, id: 'map-fields' do |map| %>
-      <%= map.label :address, "場所", class: "mb-2 inline-block text-sm text-gray-800 sm:text-base" %>
+      <%= map.label :address, "場所", class: "inline-block text-gray-800 sm:text-base" %>
+      <p class="mb-2 text-sm">(マップにピンを設置すると住所が表示されます)</p>
       <%= map.text_field :address, id: "address", class: "form-control w-full border bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring" %>
 
       <a class="btn m-4" onclick="codeAddress()">地名で検索</a>
