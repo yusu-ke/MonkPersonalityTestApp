@@ -5,7 +5,7 @@ class PostsController < ApplicationController
     @q = Post.joins(:map).ransack(params[:q] || {})
     @posts = @q.result(distinct: false).includes(:user, :view_counts).order(created_at: :desc).page(params[:page])
     # 全ユーザーのマップ情報を取得
-    @locations = Map.joins(:post).where(posts: { id: @posts.pluck(:id) } )
+    @locations = Map.joins(:post).where(posts: { id: @posts.pluck(:id) })
     gon.locations = @locations.map do |location|
       {
         latitude: location.latitude,
