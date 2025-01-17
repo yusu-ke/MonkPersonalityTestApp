@@ -4,8 +4,51 @@
     <div class="mb-5 md:mb-10">
       <h1 class="mb-4 text-center text-2xl font-bold md:mb-6 lg:text-3xl">投稿一覧</h1>
       <p class="py-3 mx-auto max-w-screen-md text-center md:text-lg">あなたが訪れた寺院・史跡名跡を共有</p>
+       
     </div>
-     <%= render partial: "posts/post", locals: { posts: @posts, maps: @maps } %>
+    <div class="px-1 py-2 shadow-md" style="height: 750px;">
+      <div id="index-map" class="w-full h-full max-w-screen-lg mx-auto"></div>
+    </div>
+
   </div>
     <%= paginate @posts %>
 </div>
+
+<script 
+  type="text/javascript" 
+  src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_MAP_API'] %>&callback=InitAllMap" 
+  async>
+</script>
+
+<script>
+  function InitAllMap() {
+
+    // 初期位置
+    const initialPosition = { lat: 35.011564, lng: 135.768149 };
+
+    // 地図を作成
+    const map = new google.maps.Map(document.getElementById("index-map"), {
+      center: initialPosition,
+      zoom: 8,
+    });
+
+    // マーカーを各地に配置
+    if (gon?.locations?.length > 0) {
+      gon.locations.forEach((location) => {
+        const marker = new google.maps.Marker({
+          position: { lat: location.latitude, lng: location.longitude },
+          map: map,
+          title: location.address,
+          icon: location.marker_image? {
+            url: location.marker_image,
+            scaledSize: new google.maps.Size(60, 60)
+          } : null,
+        });
+
+        marker.addListener("click", function(){
+          window.location.href = location.link;
+        });
+      });
+    }
+  }
+</script>

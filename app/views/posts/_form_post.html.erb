@@ -8,7 +8,7 @@
     <div class="text-center">地図アイコンを選択</div>
       <div class="text-center mb-2 text-sm">（未選択の場合、GoogleMap標準マーカーになります）</div>
         <div class="flex flex-wrap justify-center">
-          <% ["castel.png", "museum.png", "kohun.png", "mountain.png", "torii.png", "battlefield.png", "buddha.png", "china_gate.png"].each_with_index do |icon, index| %>
+          <% ["castle.png", "museum_pin.png", "kohun_pin.png", "mountian_pin.png", "torii_pin.png", "kosenjou_pin.png", "daibutu_pin.png", "chukamon.png"].each_with_index do |icon, index| %>
             <div class="w-1/4 p-2">
               <%= f.radio_button :marker_image, asset_path(icon), id: "icon_#{index}", class: "hidden peer" %>
               <%= label_tag "icon_#{index}", class: "cursor-pointer border-2 border-gray-300 rounded-md hover:border-indigo-500 peer-checked:border-indigo-500 block" do %>
