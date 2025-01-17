@@ -4,8 +4,8 @@
       <h1 class="mb-4 text-center text-2xl font-bold md:mb-6 lg:text-3xl">マイマップ</h1>
     </div>
 
-    <div class="flex justify-center mt-5">
-      <div id="profiles-map" class="w-full max-w-3xl" style="height: 500px;"></div>
+    <div class="px-1 py-2 shadow-md" style="height: 750px;">
+      <div id="profiles-map" class="w-full h-full mx-auto"></div>
     </div>
 
   <div class="py-1 sm:py-6 lg:py-7 mt-5">
@@ -70,7 +70,7 @@
 <script>
   function profilesInitMap() {
     // 記事未作成時の初期位置
-    const myLatLng = { lat: 35.68090045006303, lng: 139.76690798417752 };
+    const myLatLng = { lat: 35.011564, lng: 135.768149 };
 
     // 地図の初期位置
     const initialPosition = gon?.locations?.length > 0
@@ -80,7 +80,7 @@
     // 地図を作成
     const map = new google.maps.Map(document.getElementById("profiles-map"), {
       center: initialPosition,
-      zoom: 12,
+      zoom: 8,
     });
 
     if (gon?.locations?.length > 0) {
@@ -91,7 +91,7 @@
           title: location.address,
           icon: location.marker_image? {
             url: location.marker_image,
-            scaledSize: new google.maps.Size(30, 30)
+            scaledSize: new google.maps.Size(60, 60)
           } : null,
         });
 

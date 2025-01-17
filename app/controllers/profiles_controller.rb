@@ -18,7 +18,7 @@ class ProfilesController < ApplicationController
 
   def show
     @posts = current_user.posts
-    @locations = Map.joins(:post).where(posts: { user_id: current_user.id }).select("maps.*, posts.id as post_id")
+    @locations = Map.joins(:post).where(posts: { user_id: current_user.id })
     gon.locations = @locations.map do |location|
       {
         latitude: location.latitude,

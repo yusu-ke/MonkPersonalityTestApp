@@ -3,7 +3,18 @@ class PostsController < ApplicationController
 
   def index
     @q = Post.joins(:map).ransack(params[:q] || {})
-    @posts = @q.result(distinct: false).includes(:user, :view_counts).order(created_at: :desc).all.page(params[:page])
+    @posts = @q.result(distinct: false).includes(:user, :view_counts).order(created_at: :desc).page(params[:page])
+    # 全ユーザーのマップ情報を取得
+    @locations = Map.joins(:post).where(posts: { id: @posts.pluck(:id) })
+    gon.locations = @locations.map do |location|
+      {
+        latitude: location.latitude,
+        longitude: location.longitude,
+        address: location.address,
+        marker_image: location.marker_image,
+        link: post_path(location.post_id)
+      }
+    end
   end
 
   def new
@@ -11,7 +22,6 @@ class PostsController < ApplicationController
   end
 
   def create
-    puts params[:post].inspect
     @post = current_user.posts.build(post_params)
     if @post.save
       if params[:post][:map_attributes].present?
