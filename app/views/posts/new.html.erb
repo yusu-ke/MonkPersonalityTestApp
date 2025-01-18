@@ -69,6 +69,8 @@ function initMap() {
     map_lng.value = lng; // 隠しフィールドに値を設定
 
     newMarker(lat, lng);
+
+    geocodeLatLng(lat, lng);
   });
 }
 
@@ -98,5 +100,25 @@ function codeAddress() {
     }
   );
 }
+
+function geocodeLatLng(lat, lng) {
+  const geocoder = new google.maps.Geocoder();
+  const latlng = { lat: lat, lng: lng };
+
+  // 逆ジオコーディング処理
+  geocoder.geocode({ location: latlng })
+    .then((response) => {
+      if (response.results[0]) {
+        let address = response.results[0].formatted_address; // 住所を取得
+        address = address.replace(/^日本、?|\s?〒\d{3}-\d{4}/g, '').trim();
+        document.getElementById("address").value = address; // 住所をフォームにセット
+      } else {
+        console.log("住所を取得できませんでした。")
+      }
+    })
+  .catch((error) => console.error(error));
+}
+
+window.initMap = initMap;
 
 </script>
