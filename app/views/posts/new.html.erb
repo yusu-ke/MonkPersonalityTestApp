@@ -109,12 +109,11 @@ function geocodeLatLng(lat, lng) {
   geocoder.geocode({ location: latlng })
     .then((response) => {
       if (response.results[0]) {
-        // 住所を取得
-        let address = response.results[0].formatted_address;
-
+        let address = response.results[0].formatted_address; // 住所を取得
         address = address.replace(/^日本、?|\s?〒\d{3}-\d{4}/g, '').trim();
-
         document.getElementById("address").value = address; // 住所をフォームにセット
+      } else {
+        console.log("住所を取得できませんでした。")
       }
     })
   .catch((error) => console.error(error));
