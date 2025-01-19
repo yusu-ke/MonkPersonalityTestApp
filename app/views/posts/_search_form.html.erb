@@ -2,17 +2,18 @@
   <%= search_form_for @q, html: { class: "flex flex-row w-full space-x-4" } do |f| %>
     <!-- 寺院名または本文検索窓 -->
     <div class="relative flex-grow input input-bordered">
-      <%= f.search_field :temple_name_or_comment_cont, placeholder: "寺院名,本文", class: "w-full p-2 text-sm h-12" %>
+      <%= f.search_field :temple_name_or_comment_cont, placeholder: "タイトル、本文で検索", class: "w-full p-2 text-sm h-12" %>
     </div>
 
     <!-- 場所検索窓 -->
     <div class="relative flex-grow input input-bordered">
-      <%= f.search_field :map_address_cont, placeholder: "場所", class: "w-full p-2 text-sm h-12" %>
+      <%= f.search_field :map_address_cont, placeholder: "場所で検索", class: "w-full p-2 text-sm h-12" %>
     </div>
 
     <!-- 検索ボタン -->
     <div>
-      <%= f.submit "検索", class: "rounded border text-black bg-gradient-to-r from-[#a48953] to-[#8c7444] hover:from-white hover:to-white hover:text-gold1 hover:border-gold1 px-4 py-3 text-sm" %>
+      <%= f.submit "検索", class: "rounded border text-black bg-gradient-to-r from-[#a48953] to-[#8c7444] hover:from-white hover:to-white hover:text-gold1 hover:border-gold1 px-4 py-3 text-sm",
+       data: (@no_results ? { turbo_confirm: "検索結果が見つかりませんでした。" } : {}) %>
     </div>
   <% end %>
 </div>

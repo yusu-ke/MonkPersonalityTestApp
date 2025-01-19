@@ -1,17 +1,19 @@
 <div class="py-1 sm:py-6 lg:py-7 mt-5">
   <div class="mx-auto max-w-screen-xl px-5 md:px-8">
+    <div class="flex justify-end mb-8"> <!-- ソートリンクをここに移動 -->
+      <%= link_to '新しい順', posts_path(latest: "true"), class: 'mr-2 hover:text-blue-500 underline' %>
+      <%= link_to '古い順', posts_path(old: "true"), class: 'hover:text-blue-500 underline' %>
+      <p>（10件）</p>
+    </div>
      <%= render 'search_form', q: @q, url: posts_path %>
     <div class="mb-5 md:mb-10">
       <h1 class="mb-4 text-center text-2xl font-bold md:mb-6 lg:text-3xl">投稿一覧</h1>
-      <p class="py-3 mx-auto max-w-screen-md text-center md:text-lg">あなたが訪れた寺院・史跡名跡を共有</p>
-       
+      <p class="py-3 mx-auto max-w-screen-md text-center md:text-lg">あなたが訪れた寺院・史跡名跡を共有</p>      
     </div>
     <div class="px-1 py-2 shadow-md" style="height: 750px;">
       <div id="index-map" class="w-full h-full max-w-screen-lg mx-auto"></div>
     </div>
-
   </div>
-    <%= paginate @posts %>
 </div>
 
 <script 
