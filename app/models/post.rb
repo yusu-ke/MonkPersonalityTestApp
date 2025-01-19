@@ -10,8 +10,11 @@ class Post < ApplicationRecord
   has_one :map, dependent: :destroy
   accepts_nested_attributes_for :map
 
+  scope :latest, -> { order(created_at: :desc).limit(10) }
+  scope :old, -> { order(created_at: :asc).limit(10) }
+
   def self.ransackable_attributes(auth_object = nil)
-    [ "comment", "created_at", "id", "location", "post_images", "temple_name", "updated_at", "user_id" ]
+    [ "comment", "created_at", "id", "post_images", "temple_name", "updated_at", "user_id" ]
   end
 
   def self.ransackable_associations(auth_object = nil)
