@@ -5,13 +5,13 @@ class PostsController < ApplicationController
     @q = Post.joins(:map).ransack(params[:q] || {})
     @posts = @q.result(distinct: false).includes(:user, :view_counts).order(created_at: :desc).page(params[:page])
     @no_results = @posts.empty?
-    
+
     if params[:latest]
-        @posts = Post.latest
-      elsif params[:old]
-        @posts = Post.old
-      else
-        @posts = Post.all
+      @posts = Post.latest
+    elsif params[:old]
+      @posts = Post.old
+    else
+      @posts = Post.all
     end
 
     # 全ユーザーのマップ情報を取得
