@@ -4,7 +4,7 @@ RSpec.describe Post, type: :model do
   describe "バリデーション" do
     it "すべてのバリデーションが機能しているのか" do
       user = User.create(email: "user@email.com", password: "password")
-      post = build(:post, user: user, post_images: [fixture_file_upload('image_test.jpg')])
+      post = build(:post, user: user, post_images: [ fixture_file_upload('image_test.jpg') ])
       expect(post).to be_valid
       expect(post.errors).to be_empty
     end
