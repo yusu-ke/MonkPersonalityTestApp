@@ -1,5 +1,6 @@
 class PostsController < ApplicationController
   before_action :set_post, only: %i[ edit update destroy ]
+  before_action :authenticate_user!
 
   def index
     @q = Post.joins(:map).ransack(params[:q] || {})
@@ -77,7 +78,10 @@ class PostsController < ApplicationController
   private
 
   def set_post
-    @post = current_user.posts.find(params[:id])
+    @post = current_user.posts.find_by(id: params[:id])
+    unless @post
+      redirect_to posts_path, alert: "権限がない、もしくは投稿が存在しません。"
+    end
   end
 
   def set_map_data
