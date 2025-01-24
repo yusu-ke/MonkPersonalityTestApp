@@ -4,5 +4,9 @@ FactoryBot.define do
     comment { "comment" }
 
     association :user
+
+    after(:build) do |post|
+      post.map ||= build(:map, post: post)
+    end
   end
 end

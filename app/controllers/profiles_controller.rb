@@ -1,5 +1,6 @@
 class ProfilesController < ApplicationController
   before_action :set_user, only: %i[edit update]
+  before_action :authenticate_user!
 
   def edit
     @user = current_user
@@ -33,7 +34,11 @@ class ProfilesController < ApplicationController
   private
 
   def set_user
-    @user = User.find(current_user.id)
+    if current_user.nil?
+      redirect_to root_path, alert: "ログインが必要です。"
+    else
+      @user = User.find(current_user.id)
+    end
   end
 
   def user_params

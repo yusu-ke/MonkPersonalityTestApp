@@ -1,7 +1,18 @@
 # This file is copied to spec/ when you run 'rails generate rspec:install'
 require 'spec_helper'
+require 'capybara/rspec'
+
+# Capybara.register_driver :selenium_chrome_remote do |app|
+#  options = selenium_chrome_options
+#  Capybara::Selenium::Driver.new(app, browser: :remote, url: "http://selenium_chrome:4444/wd/hub", capabilities: options)
+# end
+
+# Capybara.javascript_driver = :selenium_chrome_remote
+
+
 
 ENV['RAILS_ENV'] ||= 'test'
+require File.expand_path('../../config/environment', __FILE__)
 require_relative '../config/environment'
 # Prevent database truncation if the environment is production
 abort("The Rails environment is running in production mode!") if Rails.env.production?
@@ -27,7 +38,7 @@ require File.expand_path("spec/support/controller_macros.rb")
 # require only the support files necessary.
 #
 # Rails.root.glob('spec/support/**/*.rb').sort_by(&:to_s).each { |f| require f }
-
+Dir[Rails.root.join('spec', 'support', '**', '*.rb')].each { |f| require f }
 # Checks for pending migrations and applies them before tests are run.
 # If you are not using ActiveRecord, you can remove these lines.
 begin
@@ -46,6 +57,7 @@ RSpec.configure do |config|
   # instead of true.
   config.use_transactional_fixtures = true
 
+  config.include Devise::Test::IntegrationHelpers, type: :system
   config.include Devise::Test::ControllerHelpers, type: :controller
   config.include Devise::Test::IntegrationHelpers, type: :request
   config.extend ControllerMacros, type: :controller
@@ -58,6 +70,19 @@ RSpec.configure do |config|
   #     RSpec.describe UsersController, type: :request do
   #       # ...
   #     end
+
+  config.before(:suite) do
+    DatabaseCleaner.clean_with(:truncation)
+  end
+
+  config.before(:each) do
+    DatabaseCleaner.strategy = :transaction
+    DatabaseCleaner.start
+  end
+
+  config.after(:each) do
+    DatabaseCleaner.clean
+  end
   #
   # The different available types are documented in the features, such as in
   # https://rspec.info/features/7-0/rspec-rails
@@ -74,4 +99,12 @@ RSpec.configure do |config|
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
   config.include FactoryBot::Syntax::Methods
+
+  config.before(:each, type: :system) do
+    driven_by :remote_chrome
+    Capybara.server_host = IPSocket.getaddress(Socket.gethostname)
+    Capybara.server_port = 4444
+    Capybara.app_host = "http://#{Capybara.server_host}:#{Capybara.server_port}"
+    Capybara.ignore_hidden_elements = false
+  end
 end
