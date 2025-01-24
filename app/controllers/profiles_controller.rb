@@ -36,7 +36,7 @@ class ProfilesController < ApplicationController
   def set_user
     if current_user.nil?
       redirect_to root_path, alert: "ログインが必要です。"
-    else    
+    else
       @user = User.find(current_user.id)
     end
   end
