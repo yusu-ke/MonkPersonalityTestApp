@@ -65,9 +65,9 @@
 
 .modal-image {
   background-image: url("mobile_gradation.png");
-  background-size: cover; /* 背景をモーダル全体にフィット */
-  background-position: center; /* 背景の中心を表示 */
-  background-repeat: no-repeat; /* 繰り返しを防止 */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 .swiper {
@@ -80,4 +80,12 @@
   justify-content: center;
   align-items: center;
   overflow: hidden;
+}
+
+.swiper-pagination {
+  position: fixed;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
 }
