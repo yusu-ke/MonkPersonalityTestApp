@@ -32,6 +32,21 @@
   animation-fill-mode: forwards;
 }
 
+@keyframes fade_in3 {
+  0% {opacity: 0}
+  100% {opacity: 1}
+}
+
+.animation-fadeIn3 {
+  animation-name: fade_in3;
+  animation-duration:1s;
+  animation-timing-function: ease-out;
+  animation-delay:0s;
+  animation-iteration-count:1;
+  animation-direction:normal;
+  animation-fill-mode: forwards;
+}
+
 .gradation-image{
   background-image: url("gradation.png");
   background-size: contain;
@@ -46,6 +61,13 @@
   .gradation-image {
     background-image: url("mobile_gradation.png");
   }
+}
+
+.modal-image {
+  background-image: url("mobile_gradation.png");
+  background-size: cover; /* 背景をモーダル全体にフィット */
+  background-position: center; /* 背景の中心を表示 */
+  background-repeat: no-repeat; /* 繰り返しを防止 */
 }
 
 .swiper {

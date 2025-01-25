@@ -7,4 +7,28 @@
   <div class="mt-9"> 
     <%= link_to "診断する", new_personality_test_path, class: "inline-block bg-blue-300 hover:bg-blue-400 text-black font-semibold py-3 px-6 rounded-md shadow-md transition duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-opacity-50" %>
   </div>
+
+
+  
+</div>
+
+
+<div id="modal" class="modal hidden ">
+  <div class="modal-image animation-fadeIn3 modal-box mt-8 sm:h-[80vh] w-[80vw] h-[85vh] max-w-5xl bg-neutral-100 rounded-lg">
+    <div class="swiper-container mySwiper overflow-hidden">
+      <div class="swiper-wrapper py-6 test-center">
+        <div class="swiper-slide">
+          <%= render 'shared/slide_content1' %>
+        </div>
+        <div class="swiper-slide">
+          <%= render 'shared/slide_content2' %>
+        </div>
+        <div class="swiper-slide">
+          <%= render 'shared/slide_content3' %>
+        </div>
+      </div>
+      <!-- ページネーション要素 -->
+      <div class="swiper-pagination"></div>
+    </div>
+  </div>
 </div>

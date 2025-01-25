@@ -2,14 +2,28 @@
 import "@hotwired/turbo-rails"
 import "./controllers"
 
+document.addEventListener("DOMContentLoaded", () => {
+  const modal = document.getElementById("modal");
+  const btn = document.getElementById("btn");
+
+  modal.classList.add("modal-open");
+
+  btn.addEventListener("click", () => {
+    modal.classList.remove("modal-open");
+    modal.classList.add("hidden");
+  });
+});
+
+
 document.addEventListener('turbo:load', function () {
-  var swiper = new Swiper(".mySwiper", {
+  let swiper = new Swiper(".mySwiper", {
     spaceBetween: 30,
     effect: "slide",
     slidesPerView: 1,
     autoHeight: true,
     pagination: {
       el: ".swiper-pagination",
+      dynamicBullets: true,
       clickable: true,
     },
     navigation: {
@@ -19,7 +33,7 @@ document.addEventListener('turbo:load', function () {
   });
 
   Turbo.frame.find('posts').addEventListener('turbo:frame-load', function () {
-    swiper.update();  // Swiperの更新
+    swiper.update();
   });
 });
 
