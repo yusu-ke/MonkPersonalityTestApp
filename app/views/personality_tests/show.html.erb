@@ -41,7 +41,7 @@
     <div>
       <p class="text-sm  py-2 px-2">結果をシェアする</p>
     </div>
-    <a href="https://twitter.com/intent/tweet?text=あなたの診断結果は...%0A%0A<%= ERB::Util.url_encode(@result.name) %>(<%= ERB::Util.url_encode(@result.title) %>)%0A&hashtags=診断,名僧,歴史&url=<%= ERB::Util.url_encode(root_url) %>"
+    <a href="https://twitter.com/intent/tweet?text=あなたの診断結果は...%0A%0A<%= ERB::Util.url_encode(@result.name) %>(<%= ERB::Util.url_encode(@result.title) %>)%0A&hashtags=診断,名僧,歴史&url=<%= ERB::Util.url_encode(request.original_url) %>"
         target="_blank" rel="nofollow">
       <i class="fa-brands fa-square-x-twitter fa-2x"></i>
     </a>
