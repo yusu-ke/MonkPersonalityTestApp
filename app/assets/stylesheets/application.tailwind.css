@@ -1,3 +1,5 @@
+@import "rails_admin/styles/base";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
