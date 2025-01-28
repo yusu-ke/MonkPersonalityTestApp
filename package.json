@@ -6,7 +6,8 @@
   },
   "scripts": {
     "build": "esbuild app/javascript/*.* --bundle --sourcemap --format=esm --outdir=app/assets/builds --public-path=/assets",
-    "build:css": "tailwindcss -i ./app/assets/stylesheets/application.tailwind.css -o ./app/assets/builds/application.css --minify"
+    "build:css": "tailwindcss -i ./app/assets/stylesheets/application.tailwind.css -o ./app/assets/builds/application.css --minify",
+    "build::rails_admin_css": "sass ./app/assets/stylesheets/application.sass.scss:./app/assets/builds/application.css ./app/assets/stylesheets/rails_admin.scss:./app/assets/builds/rails_admin.css --no-source-map --load-path=node_modules"
   },
   "dependencies": {
     "@hotwired/stimulus": "^3.2.2",
@@ -14,6 +15,8 @@
     "autoprefixer": "^10.4.20",
     "daisyui": "^4.12.22",
     "postcss": "^8.4.49",
+    "rails_admin": "^3.3.0",
+    "sass": "^1.83.4",
     "tailwindcss": "^3.4.16"
   }
 }

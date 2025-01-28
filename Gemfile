@@ -63,7 +63,7 @@ gem "omniauth-rails_csrf_protection"
 
 gem "rspec-rails"
 
-gem "rails_admin", "~> 3.0"
+gem 'rails_admin'
 
 gem "cancancan"
 
