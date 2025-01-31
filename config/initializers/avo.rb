@@ -2,7 +2,7 @@
 # The values disaplayed here are the default ones. Uncomment and change them to fit your needs.
 Avo.configure do |config|
   ## == Routing ==
-  config.root_path = '/avo'
+  config.root_path = "/avo"
   # used only when you have custom `map` configuration in your config.ru
   # config.prefix_path = "/internal"
 
@@ -24,11 +24,11 @@ Avo.configure do |config|
   ## == Authentication ==
   config.current_user_method = :current_user
 
- # config.authenticate_with do
+  # config.authenticate_with do
   #  unless current_user&.admin?
-   #   new_user_session_path, alert: '管理者としてログインしてください。'
-    #end
-  #end
+  #   new_user_session_path, alert: '管理者としてログインしてください。'
+  # end
+  # end
 
   ## == Authorization ==
   # config.is_admin_method = :is_admin
@@ -162,11 +162,11 @@ Avo.configure do |config|
   #   link "Profile", path: "/avo/profile", icon: "heroicons/outline/user-circle"
   # }
 
-#  config.authorization_methods = {
- #   index: -> { current_user&.admin? },
+  #  config.authorization_methods = {
+  #   index: -> { current_user&.admin? },
   #  show: -> { current_user&.admin? },
   #  create: -> { current_user&.admin? },
   #  update: -> { current_user&.admin? },
   #  destroy: -> { current_user&.admin? }
-  #}
+  # }
 end
