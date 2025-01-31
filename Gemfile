@@ -93,3 +93,7 @@ group :test do
   gem "webdrivers"
   gem "database_cleaner-active_record"
 end
+
+gem "avo"
+
+gem 'cancancan'

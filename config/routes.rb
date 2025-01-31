@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  authenticate :user, ->(user) { user.admin? } do
+    mount Avo::Engine => '/avo'
+  end
   devise_for :users, controllers: {
     registrations: "users/registrations",
     sessions: "users/sessions",
@@ -18,7 +21,7 @@ Rails.application.routes.draw do
   get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
 
   # Defines the root path route ("/")
-  root "home#index"
+  root to: "home#index"
   resources :personality_tests, only: [ :new, :create, :show ]
   resources :posts, only: [ :index, :new, :create, :edit, :show, :edit, :update, :destroy ]
   resource :profile, only: [ :show, :edit, :update ] do
