@@ -96,4 +96,4 @@ end
 
 gem "avo"
 
-gem 'cancancan'
+gem "cancancan"
