@@ -37,20 +37,12 @@
       <title>プロフィール</title>
     <% elsif controller_path == "personality_tests" && action_name == "new" %>
       <title>性格診断</title>
-    <% elsif controller_path == "personality_tests" && action_name == "show" %>
-      <title>診断結果: <%= @personality_test.result %></title>
     <% elsif controller_path == "posts" && action_name == "index" %>
       <title>投稿一覧</title>
     <% elsif controller_path == "posts" && action_name == "new" %>
       <title>新規投稿</title>
-    <% elsif controller_path == "posts" && action_name == "edit" %>
-      <title>投稿編集</title>
-    <% elsif controller_path == "posts" && action_name == "show" %>
-      <title><%= @post.title %></title>
-    <% elsif controller_path == "profiles" && action_name == "user_info" %>
-      <title>ユーザー情報</title>
     <% else %>
-      <title>サイト名</title>
+      <title>名僧マッチ</title>
     <% end %>
   </head>
 
