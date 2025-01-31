@@ -21,6 +21,37 @@
     <%= display_meta_tags(default_meta_tags) %>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-MQMWTXDKBP"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-MQMWTXDKBP');
+    </script>
+    <% if current_page?(root_path) %>
+      <title>トップページ</title>
+    <% elsif current_page?(profile_path) %>
+      <title>プロフィール</title>
+    <% elsif controller_path == "personality_tests" && action_name == "new" %>
+      <title>性格診断</title>
+    <% elsif controller_path == "personality_tests" && action_name == "show" %>
+      <title>診断結果: <%= @personality_test.result %></title>
+    <% elsif controller_path == "posts" && action_name == "index" %>
+      <title>投稿一覧</title>
+    <% elsif controller_path == "posts" && action_name == "new" %>
+      <title>新規投稿</title>
+    <% elsif controller_path == "posts" && action_name == "edit" %>
+      <title>投稿編集</title>
+    <% elsif controller_path == "posts" && action_name == "show" %>
+      <title><%= @post.title %></title>
+    <% elsif controller_path == "profiles" && action_name == "user_info" %>
+      <title>ユーザー情報</title>
+    <% else %>
+      <title>サイト名</title>
+    <% end %>
   </head>
 
   <body>
