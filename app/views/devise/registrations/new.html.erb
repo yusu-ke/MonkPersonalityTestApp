@@ -36,6 +36,17 @@
           </div>
         </div>
       <% end %>
+
+    <p class="text-sm mt-4">
+      ※登録に伴い、
+      <a href="<%= privacy_path %>" class="hover:underline transition-all duration-500">プライバシーポリシー</a>、
+      <a href="<%= terms_path %>" class="hover:underline transition-all duration-500">利用規約</a>
+      に同意をいただいたものとみなされます。
+    </p>
+
+
+
+
       <div class="py-5">  
         <%= render "devise/shared/links" %>
       </div>
