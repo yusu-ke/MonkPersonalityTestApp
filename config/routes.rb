@@ -22,6 +22,10 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   root to: "home#index"
+  get "contact", to: "home#contact"
+  get "terms", to: "home#terms"
+  get "privacy", to: "home#privacy"
+
   resources :personality_tests, only: [ :new, :create, :show ]
   resources :posts, only: [ :index, :new, :create, :edit, :show, :edit, :update, :destroy ]
   resource :profile, only: [ :show, :edit, :update ] do
