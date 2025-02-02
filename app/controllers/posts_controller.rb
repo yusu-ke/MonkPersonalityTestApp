@@ -4,7 +4,7 @@ class PostsController < ApplicationController
 
   def index
     @q = Post.joins(:map).ransack(params[:q] || {})
-    @posts = @q.result(distinct: false).includes(:user, :view_counts).order(created_at: :desc).page(params[:page])
+    @posts = @q.result(distinct: false).includes(:user, :view_counts).order(created_at: :desc)
     @no_results = @posts.empty?
 
     if params[:latest]
@@ -24,23 +24,9 @@ class PostsController < ApplicationController
   end
 
   def create
-    @post = current_user.posts.build(post_params)
-    if @post.save
-      if params[:post][:map_attributes].present?
-        latitude = params[:post][:map_attributes][:latitude]
-        longitude = params[:post][:map_attributes][:longitude]
-        marker_image = params[:post][:map_attributes][:marker_image]
-        unless latitude.empty? && longitude.empty?
-          @map = @post.build_map(
-            address: params[:post][:map_attributes][:address],
-            latitude: latitude,
-            longitude: longitude,
-            marker_image: marker_image
-          )
-          @map.save
-        end
-      end
+    @post = Post.create_map(current_user,post_params)
 
+    if @post.persisted?
       redirect_to posts_path, success: "掲示板を作成しました。"
     else
       flash.now[:danger] = "掲示板の作成に失敗しました。"

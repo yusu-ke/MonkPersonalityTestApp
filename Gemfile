@@ -48,8 +48,7 @@ gem "mini_magick"
 gem "fog-aws"
 # 環境変数の管理
 gem "dotenv-rails"
-# ページネーション
-gem "kaminari"
+
 # 検索機能
 gem "ransack"
 # 変数をjavascript内で使用

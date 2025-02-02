@@ -20,15 +20,7 @@ class ProfilesController < ApplicationController
   def show
     @posts = current_user.posts
     @locations = Map.joins(:post).where(posts: { user_id: current_user.id })
-    gon.locations = @locations.map do |location|
-      {
-        latitude: location.latitude,
-        longitude: location.longitude,
-        address: location.address,
-        marker_image: location.marker_image,
-        link: post_path(location.post_id)
-      }
-    end
+    gon.locations = map_locations(@locations)
   end
 
   private
@@ -43,5 +35,17 @@ class ProfilesController < ApplicationController
 
   def user_params
     params.require(:user).permit(:name, :email)
+  end
+
+  def map_locations(locations)
+    locations.map do |location|
+      {
+        latitude: location.latitude,
+        longitude: location.longitude,
+        address: location.address,
+        marker_image: location.marker_image,
+        link: post_path(location.post_id)
+      }
+    end
   end
 end

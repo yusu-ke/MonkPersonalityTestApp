@@ -21,6 +21,26 @@ class Post < ApplicationRecord
     [ "user", "view_counts", "map" ]
   end
 
+  def self.create_map(user,post_params)
+    post = user.posts.build(post_params)
+
+    if post.save && post_params[:map_attributes].present?
+      latitude = post_params[:map_attributes][:latitude]
+      longitude = post_params[:map_attributes][:longitude]
+      marker_image = post_params[:map_attributes][:marker_image]
+
+      unless latitude.blank? || longitude.blank?
+        post.create_map(
+          address: post_params[:map_attributes][:address],
+          latitude: latitude,
+          longitude: longitude,
+          marker_image: marker_image
+        )
+      end
+    end
+    post
+  end
+
   private
 
   def validate_image_coutn
