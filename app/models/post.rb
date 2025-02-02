@@ -21,7 +21,7 @@ class Post < ApplicationRecord
     [ "user", "view_counts", "map" ]
   end
 
-  def self.create_map(user,post_params)
+  def self.create_map(user, post_params)
     post = user.posts.build(post_params)
 
     if post.save && post_params[:map_attributes].present?

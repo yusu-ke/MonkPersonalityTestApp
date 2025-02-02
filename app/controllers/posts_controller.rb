@@ -24,7 +24,7 @@ class PostsController < ApplicationController
   end
 
   def create
-    @post = Post.create_map(current_user,post_params)
+    @post = Post.create_map(current_user, post_params)
 
     if @post.persisted?
       redirect_to posts_path, success: "掲示板を作成しました。"
