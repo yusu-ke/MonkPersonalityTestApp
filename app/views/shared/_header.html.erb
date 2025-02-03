@@ -10,7 +10,7 @@
         <li>
           <details class="relative">
             <summary class="mr-2">メニュー</summary>
-            <ul class="bg-my_white px-1 py-2 rounded-md text-sm top-7 right-1 leading-normal w-48 z-50">
+            <ul class="bg-my_white px-1 py-2 rounded-md text-sm top-7 right-1 leading-normal w-48 z-50 dark:bg-gray-700">
               <% if user_signed_in? %>
                 <li><%= link_to '投稿一覧', posts_path %></li>
                 <li><%= link_to '新規投稿', new_post_path %></li>
