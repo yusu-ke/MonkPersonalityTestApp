@@ -9,7 +9,6 @@ class PersonalityTestsController < ApplicationController
     @result = @personality_test.get_result
 
     if @result
-      session[:result] = @result.id
       redirect_to personality_test_path(@result.id)
     else
       flash[:alert] = "診断結果の取得に失敗しました。"
@@ -18,7 +17,7 @@ class PersonalityTestsController < ApplicationController
   end
 
   def show
-    @result = Monk.find_by(id: session[:result])
+    @result = Monk.find_by(id: params[:id])
     unless @result
       redirect_to new_personality_test_path
     end
