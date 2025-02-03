@@ -23,7 +23,7 @@
           <div id="radios" class="relative fustify-center items-center space-x-5 mt-2">
             <% question.score_mappings.each do |mapping| %>
               <%= radio_button_tag "personality_test[answers][#{ question.id }]", mapping.option, false,
-                class: "form-radio h-6 w-6 text-indigo-500 focus:ring-indigo-400 focus:ring-offset-2",
+                class: "form-radio h-6 w-6 text-indigo-500 focus:ring-indigo-400 focus:ring-offset-2 dark:accent-white",
                 data: { action: "change->step-form#autoNext" } %>
             <% end %>
           </div>

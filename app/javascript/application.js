@@ -6,14 +6,17 @@ document.addEventListener("DOMContentLoaded", () => {
   const modal = document.getElementById("modal");
   const btn = document.getElementById("btn");
 
-  modal.classList.add("modal-open");
+  if (!localStorage.getItem("visited")) {
+    modal.classList.add("modal-open");
 
-  btn.addEventListener("click", () => {
-    modal.classList.remove("modal-open");
-    modal.classList.add("hidden");
-  });
+    btn.addEventListener("click", () => {
+      modal.classList.remove("modal-open");
+      modal.classList.add("hidden");
+    });
+    
+    localStorage.setItem("visited", "true")
+  }
 });
-
 
 document.addEventListener('turbo:load', function () {
   let swiper = new Swiper(".mySwiper", {

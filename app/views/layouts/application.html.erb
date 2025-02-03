@@ -52,7 +52,9 @@
       <%= render 'shared/header'%>
       <%= render 'devise/shared/flash_message' unless controller_name == 'sessions' && action_name == 'new' %>
       <%= yield %>
-      <%= render 'shared/footer' %>
+      <% unless controller_name == 'personality_tests' && action_name == 'show'  %>
+        <%= render 'shared/footer' %>
+      <% end %>
     </div>
   </body>
 </html>
