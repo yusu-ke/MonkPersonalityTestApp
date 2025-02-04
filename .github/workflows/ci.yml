@@ -72,10 +72,11 @@ jobs:
       - name: Install chromedriver
         run: |
           sudo apt-get update
-          sudo apt-get install -y libnss3 libgconf-2-4
+          sudo apt-get install -y libnss3 libglib2.0-bin dconf-service
           wget https://chromedriver.storage.googleapis.com/106.0.5249.61/chromedriver_linux64.zip
           unzip chromedriver_linux64.zip
           sudo mv chromedriver /usr/local/bin
+
 
       - name: Set up Capybara to use headless Chrome
         run: |
