@@ -100,7 +100,7 @@ jobs:
           bundle exec rspec
 
       - name: Upload Capybara screenshots
-        if: failure()
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: capybara-screenshots
