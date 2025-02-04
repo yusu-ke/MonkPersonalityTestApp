@@ -69,10 +69,24 @@ jobs:
           ruby-version: .ruby-version
           bundler-cache: true
 
-      - name: Install Chrome
+      - name: Install chromedriver
         run: |
           sudo apt-get update
-          sudo apt-get install -y google-chrome-stable
+          sudo apt-get install -y libnss3 libgconf-2-4
+          wget https://chromedriver.storage.googleapis.com/106.0.5249.61/chromedriver_linux64.zip
+          unzip chromedriver_linux64.zip
+          sudo mv chromedriver /usr/local/bin
+
+      - name: Set up Capybara to use headless Chrome
+        run: |
+          echo "Capybara.register_driver :selenium_chrome_headless do |app|" >> config/initializers/capybara.rb
+          echo "  options = Selenium::WebDriver::Chrome::Options.new" >> config/initializers/capybara.rb
+          echo "  options.add_argument('--headless')" >> config/initializers/capybara.rb
+          echo "  options.add_argument('--no-sandbox')" >> config/initializers/capybara.rb
+          echo "  options.add_argument('--disable-gpu')" >> config/initializers/capybara.rb
+          echo "  options.add_argument('--window-size=1280x1024')" >> config/initializers/capybara.rb
+          echo "  Capybara::Selenium::Driver.new(app, browser: :chrome, options: options)" >> config/initializers/capybara.rb
+          echo "end" >> config/initializers/capybara.rb
 
       - name: Run tests
         env:
