@@ -99,10 +99,10 @@ jobs:
           bin/rails db:migrate
           bundle exec rspec
 
-      - name: Keep screenshots from failed system tests
-        uses: actions/upload-artifact@v4
+      - name: Upload Capybara screenshots
         if: failure()
+        uses: actions/upload-artifact@v4
         with:
-          name: screenshots
-          path: ${{ github.workspace }}/tmp/screenshots
+          name: capybara-screenshots
+          path: tmp/capybara
           if-no-files-found: ignore
