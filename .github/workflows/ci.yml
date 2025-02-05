@@ -69,25 +69,16 @@ jobs:
           ruby-version: .ruby-version
           bundler-cache: true
 
-      - name: Install chromedriver
+      - name: Check for port conflicts and set CAPYBARA_PORT
         run: |
-          sudo apt-get update
-          sudo apt-get install -y libnss3 libglib2.0-bin dconf-service
-          wget https://chromedriver.storage.googleapis.com/106.0.5249.61/chromedriver_linux64.zip
-          unzip chromedriver_linux64.zip
-          sudo mv chromedriver /usr/local/bin
-
-
-      - name: Set up Capybara to use headless Chrome
-        run: |
-          echo "Capybara.register_driver :selenium_chrome_headless do |app|" >> config/initializers/capybara.rb
-          echo "  options = Selenium::WebDriver::Chrome::Options.new" >> config/initializers/capybara.rb
-          echo "  options.add_argument('--headless')" >> config/initializers/capybara.rb
-          echo "  options.add_argument('--no-sandbox')" >> config/initializers/capybara.rb
-          echo "  options.add_argument('--disable-gpu')" >> config/initializers/capybara.rb
-          echo "  options.add_argument('--window-size=1280x1024')" >> config/initializers/capybara.rb
-          echo "  Capybara::Selenium::Driver.new(app, browser: :chrome, options: options)" >> config/initializers/capybara.rb
-          echo "end" >> config/initializers/capybara.rb
+          PORT=4444
+          if lsof -i:$PORT; then
+          echo "Port $PORT is in use, killing the process"
+          lsof -ti:$PORT | xargs kill -9
+          fi
+          CAPYBARA_PORT=3001
+          echo "CAPYBARA_PORT=$CAPYBARA_PORT" >> $GITHUB_ENV
+          echo "DEBUG: Capybara port set to $CAPYBARA_PORT"
 
       - name: Run tests
         env:
