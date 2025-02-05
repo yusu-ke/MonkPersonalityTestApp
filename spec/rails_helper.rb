@@ -94,6 +94,8 @@ RSpec.configure do |config|
   # To enable this behaviour uncomment the line below.
   # config.infer_spec_type_from_file_location!
 
+  Capybara.asset_host = 'http://localhost:3000'
+
   # Filter lines from Rails gems in backtraces.
   config.filter_rails_from_backtrace!
   # arbitrary gems may also be filtered via:
@@ -103,8 +105,21 @@ RSpec.configure do |config|
   config.before(:each, type: :system) do
     driven_by :remote_chrome
     Capybara.server_host = IPSocket.getaddress(Socket.gethostname)
-    Capybara.server_port = 4444
+    Capybara.server_port = 3001
     Capybara.app_host = "http://#{Capybara.server_host}:#{Capybara.server_port}"
     Capybara.ignore_hidden_elements = false
   end
+
+  Capybara.register_driver :selenium_chrome_headless do |app|
+    options = Selenium::WebDriver::Chrome::Options.new
+    options.add_argument('--headless')
+    options.add_argument('--disable-gpu')
+    options.add_argument('--no-sandbox')
+    options.add_argument('--window-size=1024,768')
+    options.add_argument('disable-dev-shm-usage')
+    options.add_argument('disable-extensions')
+    Capybara::Selenium::Driver.new(app, browser: :chrome,  options: options, url: 'http://selenium:4444/wd/hub')
+  end
+
+  Capybara.javascript_driver = :selenium_chrome_headless
 end

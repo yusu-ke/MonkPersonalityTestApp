@@ -33,6 +33,7 @@ RSpec.describe "UserSessions", type: :system do
       it "ログアウト処理が成功する" do
         login_as(user, scope: :user)
         visit root_path
+        page.execute_script('document.getElementById("modal").style.display = "none";')
         find("summary", text: "メニュー").click
         expect(page).to have_link("ログアウト")
         click_link "ログアウト"

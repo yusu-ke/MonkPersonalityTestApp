@@ -2,6 +2,29 @@
 import "@hotwired/turbo-rails"
 import "./controllers"
 
+document.addEventListener('turbo:load', () => {
+  const createImageHTML = (blob) => {
+    const imageElement = document.getElementById('new-image');
+    
+    const blobImage = document.createElement('img');
+    blobImage.setAttribute('class', 'new-img');
+    blobImage.setAttribute('src', blob);
+
+    imageElement.appendChild(blobImage);
+  };
+
+  document.getElementById('post_post_images').addEventListener('change', (e) => {
+    const files = e.target.files;
+    
+    for (let i = 0; i < files.length; i++) {
+      const file = files[i];
+      const blob = window.URL.createObjectURL(file);
+      createImageHTML(blob);
+    }
+  });
+});
+
+
 document.addEventListener("DOMContentLoaded", () => {
   const modal = document.getElementById("modal");
   const btn = document.getElementById("btn");
