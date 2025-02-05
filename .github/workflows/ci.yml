@@ -73,6 +73,9 @@ jobs:
           ruby-version: .ruby-version
           bundler-cache: true
 
+      - name: set environment variables
+        run: echo "GOOGLE_MAP_API=${{ secrets.GOOGLE_MAP_API }}" >> $GITHUB_ENV
+
       - name: Check for port conflicts and set CAPYBARA_PORT
         run: |
           PORT=4444
@@ -88,6 +91,7 @@ jobs:
         env:
           RAILS_ENV: test
           DATABASE_URL: postgres://postgres:postgres@localhost:5432
+          GOOGLE_MAP_API: ${{ secrets.GOOGLE_MAP_API }}
           # REDIS_URL: redis://localhost:6379/0
         run: |
           bin/rails db:create
