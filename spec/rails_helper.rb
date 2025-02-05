@@ -93,6 +93,8 @@ RSpec.configure do |config|
   #
   # To enable this behaviour uncomment the line below.
   # config.infer_spec_type_from_file_location!
+  
+  Capybara.asset_host = 'http://localhost:3000'
 
   # Filter lines from Rails gems in backtraces.
   config.filter_rails_from_backtrace!
