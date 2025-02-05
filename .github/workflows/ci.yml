@@ -84,6 +84,10 @@ jobs:
           echo "CAPYBARA_PORT=$CAPYBARA_PORT" >> $GITHUB_ENV
           echo "DEBUG: Capybara port set to $CAPYBARA_PORT"
 
+      - name: Restart Selenium WebDriver
+        run: |
+          pkill -f chromedriver || true
+
       - name: Run tests
         env:
           RAILS_ENV: test
