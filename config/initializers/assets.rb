@@ -11,7 +11,8 @@ Rails.application.config.assets.version = "1.0"
 # folder are already added.
 # Rails.application.config.assets.precompile += %w[ admin.js admin.css ]
 # config/initializers/assets.rb
-Rails.application.config.assets.precompile += %w[ rails_admin/application.css rails_admin/application.js ]
+
+config.assets.precompile += %w[ application.tailwind.css *.png *.jpg *.jpeg *.gif favicon.ico ]
 
 Rails.application.config.assets.paths += [
     Rails.root.join("node_modules"),
