@@ -69,10 +69,6 @@ jobs:
           ruby-version: .ruby-version
           bundler-cache: true
 
-      - name: Precompile assets
-        run: |
-          RAILS_ENV=test bin/rails assets:precompile
-
       - name: Check for port conflicts and set CAPYBARA_PORT
         run: |
           PORT=4444
@@ -83,10 +79,6 @@ jobs:
           CAPYBARA_PORT=3001
           echo "CAPYBARA_PORT=$CAPYBARA_PORT" >> $GITHUB_ENV
           echo "DEBUG: Capybara port set to $CAPYBARA_PORT"
-
-      - name: Restart Selenium WebDriver
-        run: |
-          pkill -f chromedriver || true
 
       - name: Run tests
         env:
