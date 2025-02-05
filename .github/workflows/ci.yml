@@ -80,6 +80,10 @@ jobs:
           echo "CAPYBARA_PORT=$CAPYBARA_PORT" >> $GITHUB_ENV
           echo "DEBUG: Capybara port set to $CAPYBARA_PORT"
 
+      - name: Precompile assets
+        run: |
+          RAILS_ENV=test bin/rails assets:precompile
+
       - name: Run tests
         env:
           RAILS_ENV: test
