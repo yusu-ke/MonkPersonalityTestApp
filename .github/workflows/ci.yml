@@ -76,6 +76,9 @@ jobs:
       - name: set environment variables
         run: echo "GOOGLE_MAP_API=${{ secrets.GOOGLE_MAP_API }}" >> $GITHUB_ENV
 
+      - name: Precompile assets
+        run: RAILS_ENV=production bin/rails assets:precompile
+
       - name: Check for port conflicts and set CAPYBARA_PORT
         run: |
           PORT=4444

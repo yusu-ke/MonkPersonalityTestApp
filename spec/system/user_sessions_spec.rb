@@ -28,7 +28,7 @@ RSpec.describe "UserSessions", type: :system do
     end
   end
 
-  describe "ログイン後" do
+  describe "ログイン後", js: true do
     context "ログアウトボタンをクリック" do
       it "ログアウト処理が成功する" do
         login_as(user, scope: :user)
