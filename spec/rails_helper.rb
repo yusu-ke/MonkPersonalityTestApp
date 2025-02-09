@@ -104,7 +104,7 @@ RSpec.configure do |config|
     Capybara.server_host = IPSocket.getaddress(Socket.gethostname)
     Capybara.server_port = 3001
     Capybara.app_host = "http://#{Capybara.server_host}:#{Capybara.server_port}"
-    Capybara.asset_host = Capybara.app_host
+    Capybara.asset_host = "http://localhost:3000"
     Capybara.ignore_hidden_elements = false
   end
 
