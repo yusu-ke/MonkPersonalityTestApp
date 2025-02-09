@@ -82,6 +82,9 @@ jobs:
       - name: List assets
         run: ls -al public/assets
 
+      - name: Check post 3001
+        run: lsof -i:3001
+
       - name: Run tests
         env:
           RAILS_ENV: test
