@@ -12,7 +12,7 @@ require 'capybara/rspec'
 
 
 ENV['RAILS_ENV'] ||= 'test'
-require File.expand_path('../../config/environment', __FILE__)
+# require File.expand_path('../../config/environment', __FILE__)
 require_relative '../config/environment'
 # Prevent database truncation if the environment is production
 abort("The Rails environment is running in production mode!") if Rails.env.production?
@@ -90,10 +90,9 @@ RSpec.configure do |config|
   # You can also this infer these behaviours automatically by location, e.g.
   # /spec/models would pull in the same behaviour as `type: :model` but this
   # behaviour is considered legacy and will be removed in a future version.
-  #
   # To enable this behaviour uncomment the line below.
   # config.infer_spec_type_from_file_location!
-
+  # Capybara.asset_host = 'http://localhost:3000'
   # Filter lines from Rails gems in backtraces.
   config.filter_rails_from_backtrace!
   # arbitrary gems may also be filtered via:
@@ -103,8 +102,29 @@ RSpec.configure do |config|
   config.before(:each, type: :system) do
     driven_by :remote_chrome
     Capybara.server_host = IPSocket.getaddress(Socket.gethostname)
-    Capybara.server_port = 4444
+    # Capybara.server_host = '0.0.0.0'
+    Capybara.server_port = 3001
     Capybara.app_host = "http://#{Capybara.server_host}:#{Capybara.server_port}"
+    # Capybara.asset_host = "http://localhost:3000"
     Capybara.ignore_hidden_elements = false
   end
+
+  config.after(:each, type: :system) do
+    Capybara.reset_sessions!
+    Capybara.current_driver = nil
+  end
+
+  Capybara.register_driver :selenium_chrome_headless do |app|
+    options = Selenium::WebDriver::Chrome::Options.new
+    options.add_argument('--headless')
+    options.add_argument('--disable-gpu')
+    options.add_argument('--no-sandbox')
+    options.add_argument('--window-size=480,320')
+    options.add_argument('disable-dev-shm-usage')
+    options.add_argument('disable-extensions')
+    # ブラウザを操作するためのSeleniumサーバーに接続するURLを指定
+    Capybara::Selenium::Driver.new(app, browser: :chrome,  options: options, url: 'http://selenium:4444/wd/hub')
+  end
+
+  Capybara.javascript_driver = :selenium_chrome_headless
 end
