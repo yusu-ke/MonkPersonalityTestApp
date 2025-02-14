@@ -24,14 +24,15 @@ https://meisou-match.site/
 
 ■ サービスの利用イメージ
 1. ユーザーはアプリまたはウェブサイトにアクセスし、簡単な性格診断を受けることができます。
-[![Image from Gyazo](https://i.gyazo.com/2aedb7daa66bfa7d465e0cffb0378247.gif)](https://gyazo.com/2aedb7daa66bfa7d465e0cffb0378247)
+[![Image from Gyazo](https://i.gyazo.com/15894996e4eea915b8f485946771e00f.gif)](https://gyazo.com/15894996e4eea915b8f485946771e00f)
 
 2. 診断後、結果として自分に適した鎌倉時代の仏教僧を提示（著名な仏教僧の中から選出）
-[![Image from Gyazo](https://i.gyazo.com/2d10efaad2b52ea9e9ea5abed64d60b0.gif)](https://gyazo.com/2d10efaad2b52ea9e9ea5abed64d60b0)
+[![Image from Gyazo](https://i.gyazo.com/31ad0aa83668f7f5254ec7c8781a2015.gif)](https://gyazo.com/31ad0aa83668f7f5254ec7c8781a2015)
 
 4. ユーザーは診断結果受け、仏教や歴史に対する興味関心を持つことができます。
-5. ユーザーはログイン登録を行うことで、訪れた寺院の写真、コメントを登録できるようになります。
-[![Image from Gyazo](https://i.gyazo.com/5959537da90ec45346482c889b3274fc.gif)](https://gyazo.com/5959537da90ec45346482c889b3274fc)
+5. ユーザーはログイン登録を行うことで、訪れた寺院の写真、コメントを登録できるようになります。　　　　　　　　
+[![Image from Gyazo](https://i.gyazo.com/34ee584be89b346810a39c08d4b72787.gif)](https://gyazo.com/34ee584be89b346810a39c08d4b72787)
+
 
 ■ 今後の展望　　　
 
