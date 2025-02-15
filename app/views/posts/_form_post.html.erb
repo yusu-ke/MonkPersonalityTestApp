@@ -34,7 +34,7 @@
       <%= map.hidden_field :longitude, id: "post_map_longitude" %>
     <% end %>
   </div>
-    
+
   <div>
     <%= f.label :画像（３枚まで）, class: "mb-2 inline-block text-sm text-gray-800 sm:text-base" %>
     <%= f.file_field :post_images, multiple: true, class: "form-control w-full border bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring", accept: 'image/*' %>
@@ -51,15 +51,15 @@
   </div>
 <% end %>
 
-
 <dialog id="my_modal_1" class="modal">
   <div class="modal-box">
     <h3 class="text-lg font-bold">画像プレビュー</h3>
     <div id="new-image" class="pt-8 pb-4 flex flex-col gap-4"></div>
 
-  <div class="modal-action">
-    <form method="dialog">
-      <button class="btn">閉じる</button>
-    </form>
+    <div class="modal-action">
+      <form method="dialog">
+        <button class="btn">閉じる</button>
+      </form>
+    </div>
   </div>
 </dialog>

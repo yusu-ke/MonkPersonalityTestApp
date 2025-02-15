@@ -1,15 +1,12 @@
 <div class="flex flex-col items-center justify-center  text-center space-y-3 px-4 md:px-8 mt-9">
-  <p class="text-6xl font-extrabold text-gray-800">名僧マッチ</p>
-  <p class="text-lg font-medium text-gray-600">簡単診断であなたに合う名僧たちに出会う</p>
-  <p class="text-lg font-medium text-gray-600">ユーザ登録であなたの体験を共有</p>
+  <p class="text-6xl font-extrabold text-gray-800"><%= t("views.home.title") %></p>
+  <p class="text-lg font-medium text-gray-600"><%= t("views.home.subtitle") %></p>
+  <p class="text-lg font-medium text-gray-600"><%= t("views.home.user_meessage") %></p>
   <%= image_tag "22225678.png", alt: "トップ画面僧侶", class: "w-full max-w-md py-4" %>
  
   <div class="mt-9"> 
-    <%= link_to "診断する", new_personality_test_path, class: "inline-block bg-blue-300 hover:bg-blue-400 text-black font-semibold py-3 px-6 rounded-md shadow-md transition duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-opacity-50" %>
-  </div>
-
-
-  
+    <%= link_to t("views.home.diagnose_button"), new_personality_test_path, class: "inline-block bg-blue-300 hover:bg-blue-400 text-black font-semibold py-3 px-6 rounded-md shadow-md transition duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-opacity-50" %>
+  </div>  
 </div>
 
 <div id="modal" class="modal hidden ">
