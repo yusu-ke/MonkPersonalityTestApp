@@ -14,8 +14,32 @@ ja:
         blank: "を入力してください"
         post_images_blank: "を選択してください"
   views:
-      pagination:
-        previous: "前へ"
-        next: "次へ"
-        first: "最初へ"
-        last: "最後へ"
+      home:
+        title: "名僧マッチ"
+        subtitle: "簡単診断であなたに合う名僧たちに出会う"
+        user_meessage: "ユーザ登録であなたの体験を共有"
+        diagnose_button: "診断する"
+      new:
+        true: "当てはまる"
+        false: "当てはまらない"
+        back: "戻る"
+        diagnose_button: "診断する"
+      show:
+        result: "診断結果"
+        again: "もう一度診断する"
+        share_visited_places: "ユーザー登録であなたの訪れた場所を共有する"
+        share_result: "結果をシェアする"
+      header:
+        title: "名僧マッチ"
+      navigation:
+        posts_list: "投稿一覧"
+        new_post: "新規投稿"
+        my_page: "マイページ"
+        logout: "ログアウト"
+        user_info: "ユーザー情報"
+        privacy_policy: "プライバシーポリシー"
+        terms_of_service: "利用規約"
+        contact: "お問い合わせ"
+        sign_up: "新規登録"
+        login: "ログイン"
+        menu: "メニュー"

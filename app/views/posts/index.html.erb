@@ -1,6 +1,6 @@
 <div class="py-1 sm:py-6 lg:py-7 mt-5">
   <div class="mx-auto max-w-screen-xl px-5 md:px-8">
-    <div class="flex justify-end mb-8"> <!-- ソートリンクをここに移動 -->
+    <div class="flex justify-end mb-8">
       <%= link_to '新しい順', posts_path(latest: "true"), class: 'mr-2 hover:text-blue-500 underline' %>
       <%= link_to '古い順', posts_path(old: "true"), class: 'hover:text-blue-500 underline' %>
       <p>（10件）</p>
