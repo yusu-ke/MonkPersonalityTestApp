@@ -27,7 +27,7 @@ RSpec.describe 'Users', type: :system do
           fill_in "user_password_confirmation", with: "password"
           click_button "登録する"
           expect(page).to have_content "1 件エラーが発生しました。以下の内容をご確認ください。"
-          expect(page).to have_content "名前を入力してください"
+          expect(page).to have_content "ユーザー名を入力してください"
         end
       end
 

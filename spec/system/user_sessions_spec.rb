@@ -23,7 +23,7 @@ RSpec.describe "UserSessions", type: :system do
         fill_in "user_name", with: ""
         fill_in "user_password", with: user.password
         click_button "ログイン"
-        expect(page).to have_content "名前またはパスワードが違います。"
+        expect(page).to have_content "ユーザー名またはパスワードが違います。"
       end
     end
   end
