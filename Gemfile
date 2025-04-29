@@ -41,7 +41,7 @@ gem "rails-i18n"
 
 gem "devise-i18n-views"
 # 画像投稿
-gem "carrierwave", "~> 3.0"
+gem "carrierwave", "~> 3.1"
 # 画像加工
 gem "mini_magick"
 # S3アップロード
